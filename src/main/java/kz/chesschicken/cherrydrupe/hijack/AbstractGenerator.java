@@ -4,22 +4,46 @@ import kz.chesschicken.cherrydrupe.hijack.api.IMethodGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * A fundament for generator implementations, implements {@link IMethodGenerator}.
+ * @author ChessChicken-KZ
+ */
 public abstract class AbstractGenerator implements IMethodGenerator {
 
+    /**
+     * A method that resets all the properties set in generator.
+     */
     public void resetProperties() {
         this.EXCEPTION_BEHAVIOUR = EnumExceptionBehaviour.PRINT_EXCEPTION;
         this.EXCEPTION_HANDLE = null;
         this.DEFAULT_NULL_VALUE = null;
     }
 
-    public void setExceptionBehaviour(EnumExceptionBehaviour a) {
+    /**
+     * A method to set the generator's behaviour when an exception is caught.
+     * <br>
+     * See {@link EnumExceptionBehaviour} for possible behaviours.
+     * @param a an enum state, representing exception behaviour.
+     */
+    public void setExceptionBehaviour(@NotNull EnumExceptionBehaviour a) {
         this.EXCEPTION_BEHAVIOUR = a;
     }
 
+    /**
+     * A method to get value from field that contains throwable.
+     * @return "null" if empty or some {@link Throwable} value.
+     */
     public @Nullable Throwable throwable() {
         return this.EXCEPTION_HANDLE;
     }
 
+    /**
+     * A method to set the default value instead of "null".
+     * <br>
+     * Could be useful if needed to avoid NullPointerExceptions.
+     * @param t an object to replace with.
+     * @param <T> some generic type of the object.
+     */
     public <T> void setDefaultNullValue(@Nullable T t) {
         this.DEFAULT_NULL_VALUE = t;
     }
@@ -43,11 +67,11 @@ public abstract class AbstractGenerator implements IMethodGenerator {
     }
 
     @SuppressWarnings("unchecked")
-    protected <T> @Nullable T getDefaultNullValue() {
+    protected <T> @Nullable T __nullValue() {
         return (T) this.DEFAULT_NULL_VALUE;
     }
 
-    protected EnumExceptionBehaviour EXCEPTION_BEHAVIOUR = EnumExceptionBehaviour.PRINT_EXCEPTION;
-    protected Throwable EXCEPTION_HANDLE = null;
-    protected Object DEFAULT_NULL_VALUE = null;
+    EnumExceptionBehaviour EXCEPTION_BEHAVIOUR = EnumExceptionBehaviour.PRINT_EXCEPTION;
+    Throwable EXCEPTION_HANDLE = null;
+    Object DEFAULT_NULL_VALUE = null;
 }
