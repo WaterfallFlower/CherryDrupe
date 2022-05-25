@@ -1,5 +1,7 @@
 package kz.chesschicken.cherrydrupe.tryint;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * An interface implementation of the "try" statement.
  * @param <R> The interface's return type.
@@ -8,13 +10,13 @@ package kz.chesschicken.cherrydrupe.tryint;
  */
 public interface TryReturn<R, T extends Throwable> {
 
-    R _try() throws T;
+    @Nullable R _try() throws T;
 
-    R _catch(T t);
+    @Nullable R _catch(T t);
 
     default void _finally() {}
 
-    default R apply() {
+    @Nullable default R apply() {
         try {
             return _try();
         } catch (Throwable t) {

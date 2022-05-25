@@ -1,4 +1,5 @@
 package kz.chesschicken.cherrydrupe;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -9,7 +10,7 @@ public class InitAndApply {
 
     /**
      * Just a lighter version of {@link java.util.function.Consumer}.
-     * @param <A> Some value.
+     * @param <A> The instance's type.
      */
     public interface Acceptor<A> {
         void apply(@NotNull A instance);
@@ -27,7 +28,7 @@ public class InitAndApply {
      *
      * @param instance An instance to be applied, should not be null.
      * @param acceptor {@link Acceptor} A consumer that applies some specific code to the instance.
-     * @param <A> The instance type.
+     * @param <A> The instance's type.
      * @return The instance with executed consumer.
      */
     public static<A> @NotNull A generate(@NotNull A instance, @NotNull InitAndApply.Acceptor<A> acceptor) {
