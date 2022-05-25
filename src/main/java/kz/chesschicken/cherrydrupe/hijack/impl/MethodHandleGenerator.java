@@ -3,8 +3,9 @@ package kz.chesschicken.cherrydrupe.hijack.impl;
 import kz.chesschicken.cherrydrupe.function.FunctionEmpty;
 import kz.chesschicken.cherrydrupe.function.FunctionObjectArray;
 import kz.chesschicken.cherrydrupe.hijack.AbstractGenerator;
+import kz.chesschicken.cherrydrupe.hijack.api.IFieldGenerator;
+import kz.chesschicken.cherrydrupe.hijack.api.IMethodGenerator;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodType;
@@ -19,7 +20,7 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getLookup;
  * The implementation of {@link AbstractGenerator} with {@link java.lang.invoke.MethodHandles.Lookup}.
  * @author ChessChicken-KZ
  */
-public class MethodHandleGenerator extends AbstractGenerator {
+public class MethodHandleGenerator extends AbstractGenerator implements IFieldGenerator, IMethodGenerator {
 
     @Override
     public <T> @NotNull Function<Object, T> field$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {

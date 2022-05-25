@@ -1,14 +1,14 @@
 package kz.chesschicken.cherrydrupe.hijack;
 
-import kz.chesschicken.cherrydrupe.hijack.api.IMethodGenerator;
+import kz.chesschicken.cherrydrupe.hijack.api.IFieldGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A fundament for generator implementations, implements {@link IMethodGenerator}.
+ * A fundament for generator implementations.
  * @author ChessChicken-KZ
  */
-public abstract class AbstractGenerator implements IMethodGenerator {
+public abstract class AbstractGenerator {
 
     /**
      * A method that resets all the properties set in generator.
