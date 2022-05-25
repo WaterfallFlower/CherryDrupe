@@ -5,7 +5,7 @@ Supports Java 8+.
 
 ## Current features:
 
-### InitAndApply
+### [InitAndApply](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/src/main/java/kz/chesschicken/cherrydrupe/InitAndApply.java)
 An interface that allows us to initialise and pre-setup an object.
 ```java
 Map<String, String> aReadyMap = InitAndApply.apply(new HashMap<>(), instance -> {
@@ -14,11 +14,11 @@ Map<String, String> aReadyMap = InitAndApply.apply(new HashMap<>(), instance -> 
 });
 ```
 
-### Try/TryWithReturn
+### [Try](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/src/main/java/kz/chesschicken/cherrydrupe/tryint/Try.java) / [TryReturn](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/src/main/java/kz/chesschicken/cherrydrupe/tryint/TryReturn.java)
 Why not to make `try` as an interface?
 ```java
 /* Initialising the "try" here. */
-TryWithReturn<String, IOException> try1 = new TryWithReturn<String, IOException>() {
+TryReturn<String, IOException> try1 = new TryReturn<String, IOException>() {
     @Override
     public String _try() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader("readme.txt"));
