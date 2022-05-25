@@ -22,7 +22,7 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getLookup;
 public class MethodHandleGenerator extends AbstractGenerator {
 
     @Override
-    public <T> @Nullable Function<Object, T> field$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public <T> @NotNull Function<Object, T> field$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return o -> {
             try {
                 //noinspection unchecked
@@ -35,7 +35,7 @@ public class MethodHandleGenerator extends AbstractGenerator {
     }
 
     @Override
-    public <T> @Nullable BiConsumer<Object, T> field$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public <T> @NotNull BiConsumer<Object, T> field$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return (o, t) -> {
             try {
                 getLookup().findSetter(source, field_name, field_type).invoke(o, t);
@@ -46,7 +46,7 @@ public class MethodHandleGenerator extends AbstractGenerator {
     }
 
     @Override
-    public <T> @Nullable FunctionEmpty<T> fieldStatic$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public <T> @NotNull FunctionEmpty<T> fieldStatic$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return () -> {
             try {
                 //noinspection unchecked
@@ -59,7 +59,7 @@ public class MethodHandleGenerator extends AbstractGenerator {
     }
 
     @Override
-    public <T> @Nullable Consumer<T> fieldStatic$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public <T> @NotNull Consumer<T> fieldStatic$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return t -> {
             try {
                 getLookup().findStaticSetter(source, field_name, field_type).invoke(t);
@@ -70,7 +70,7 @@ public class MethodHandleGenerator extends AbstractGenerator {
     }
 
     @Override
-    public <T> @Nullable FunctionObjectArray<T> method$Virtual(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
+    public <T> @NotNull FunctionObjectArray<T> method$Virtual(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
         return o -> {
             try {
                 //noinspection unchecked
@@ -83,7 +83,7 @@ public class MethodHandleGenerator extends AbstractGenerator {
     }
 
     @Override
-    public <T> @Nullable FunctionObjectArray<T> method$Static(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
+    public <T> @NotNull FunctionObjectArray<T> method$Static(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
         return o -> {
             try {
                 MethodHandle a = getLookup().findStatic(source, method_name, MethodType.methodType(returnType, argumentsType));
@@ -97,7 +97,7 @@ public class MethodHandleGenerator extends AbstractGenerator {
     }
 
     @Override
-    public <T> @Nullable FunctionObjectArray<T> constructor$(@NotNull Class<?> source, Class<?>[] params) {
+    public <T> @NotNull FunctionObjectArray<T> constructor$(@NotNull Class<?> source, Class<?>[] params) {
         return objectTypeArgs -> {
             try {
                 //noinspection unchecked

@@ -24,7 +24,7 @@ public interface IMethodGenerator {
      * @param <T> the field's type.
      * @return A getter function for the field.
      */
-    <T> @Nullable Function<Object, T> field$Getter(
+    <T> @NotNull Function<Object, T> field$Getter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type
@@ -38,7 +38,7 @@ public interface IMethodGenerator {
      * @param <T> the field's type.
      * @return A setter function for the field.
      */
-    <T> @Nullable BiConsumer<Object, T> field$Setter(
+    <T> @NotNull BiConsumer<Object, T> field$Setter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type
@@ -52,7 +52,7 @@ public interface IMethodGenerator {
      * @param <T> the static field's type.
      * @return A getter function for the static field.
      */
-    <T> @Nullable FunctionEmpty<T> fieldStatic$Getter(
+    <T> @NotNull FunctionEmpty<T> fieldStatic$Getter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type
@@ -66,7 +66,7 @@ public interface IMethodGenerator {
      * @param <T> the static field's type.
      * @return A setter function for the static field.
      */
-    <T> @Nullable Consumer<T> fieldStatic$Setter(
+    <T> @NotNull Consumer<T> fieldStatic$Setter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type
@@ -81,7 +81,7 @@ public interface IMethodGenerator {
      * @param <T> the method's return type.
      * @return An invoker function for the method.
      */
-    <T> @Nullable FunctionObjectArray<T> method$Virtual(
+    <T> @NotNull FunctionObjectArray<T> method$Virtual(
             @NotNull Class<?> source,
             @NotNull String method_name,
             @NotNull Class<T> returnType,
@@ -97,7 +97,7 @@ public interface IMethodGenerator {
      * @param <T> the static method's return type.
      * @return An invoker function for the static method.
      */
-    <T> @Nullable FunctionObjectArray<T> method$Static(
+    <T> @NotNull FunctionObjectArray<T> method$Static(
             @NotNull Class<?> source,
             @NotNull String method_name,
             @NotNull Class<T> returnType,
@@ -111,7 +111,7 @@ public interface IMethodGenerator {
      * @param <T> the constructor's return type.
      * @return An invoker function for the constructor.
      */
-    <T> @Nullable FunctionObjectArray<T> constructor$(
+    <T> @NotNull FunctionObjectArray<T> constructor$(
             @NotNull Class<?> source,
             @NotNull Class<?>[] params
     );
