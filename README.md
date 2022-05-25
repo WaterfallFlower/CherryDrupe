@@ -21,7 +21,7 @@ Why not to make `try` as an interface?
 TryWithReturn<String, IOException> try1 = new TryWithReturn<String, IOException>() {
     @Override
     public String _try() throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/resources/text.txt"));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("readme.txt"));
         StringBuilder stringBuilder = new StringBuilder();
         String s;
         while ((s = bufferedReader.readLine()) != null) {

@@ -1,5 +1,6 @@
 package kz.chesschicken.cherrydrupe.tryint;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -8,11 +9,12 @@ import org.jetbrains.annotations.Nullable;
  * @param <T> An exception's type.
  * @author ChessChicken-KZ
  */
+@SuppressWarnings("UnusedReturnValue")
 public interface TryReturn<R, T extends Throwable> {
 
     @Nullable R _try() throws T;
 
-    @Nullable R _catch(T t);
+    @Nullable R _catch(@NotNull T t);
 
     default void _finally() {}
 

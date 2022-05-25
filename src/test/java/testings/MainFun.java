@@ -1,6 +1,7 @@
 package testings;
 
 import kz.chesschicken.cherrydrupe.tryint.TryReturn;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,7 +12,7 @@ public class MainFun {
 
         TryReturn<String, IOException> try1 = new TryReturn<String, IOException>() {
             @Override
-            public String _try() throws IOException {
+            public @NotNull String _try() throws IOException {
                 BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/resources/text.txt"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String s;
@@ -25,7 +26,7 @@ public class MainFun {
             }
 
             @Override
-            public String _catch(IOException e) {
+            public @NotNull String _catch(@NotNull IOException e) {
                 System.out.println("Oops... caught an exception!");
                 e.printStackTrace();
                 return "";
