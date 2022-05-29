@@ -6,6 +6,6 @@ package kz.chesschicken.cherrydrupe.function;
  * @author ChessChicken-KZ
  */
 @SuppressWarnings("UnusedReturnValue")
-public interface FunctionObjectArray<O> {
+public interface FunctionARRSETRET<O> {
     O apply(Object... o);
 }

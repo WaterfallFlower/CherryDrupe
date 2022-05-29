@@ -1,7 +1,7 @@
 package kz.chesschicken.cherrydrupe.hijack.api;
 
 
-import kz.chesschicken.cherrydrupe.function.FunctionEmpty;
+import kz.chesschicken.cherrydrupe.function.FunctionRET;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiConsumer;
@@ -50,7 +50,7 @@ public interface IFieldGenerator {
      * @param <T> the static field's type.
      * @return A getter function for the static field.
      */
-    <T> @NotNull FunctionEmpty<T> fieldStatic$Getter(
+    <T> @NotNull FunctionRET<T> fieldStatic$Getter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type

@@ -5,6 +5,6 @@ package kz.chesschicken.cherrydrupe.function;
  * @param <O> return type.
  * @author ChessChicken-KZ
  */
-public interface FunctionEmpty<O> {
+public interface FunctionRET<O> {
     O apply();
 }

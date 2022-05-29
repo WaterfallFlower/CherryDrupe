@@ -1,6 +1,6 @@
 package kz.chesschicken.cherrydrupe.hijack.impl;
 
-import kz.chesschicken.cherrydrupe.function.FunctionEmpty;
+import kz.chesschicken.cherrydrupe.function.FunctionRET;
 import kz.chesschicken.cherrydrupe.hijack.AbstractGenerator;
 import kz.chesschicken.cherrydrupe.hijack.api.IFieldGenerator;
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +42,7 @@ public class UnsafeGenerator extends AbstractGenerator implements IFieldGenerato
     }
 
     @Override
-    public @NotNull <T> FunctionEmpty<T> fieldStatic$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public @NotNull <T> FunctionRET<T> fieldStatic$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return () -> {
             try {
                 Field f = source.getDeclaredField(field_name);

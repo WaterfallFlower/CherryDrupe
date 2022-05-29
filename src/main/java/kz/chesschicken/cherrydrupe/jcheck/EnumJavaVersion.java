@@ -1,10 +1,18 @@
 package kz.chesschicken.cherrydrupe.jcheck;
 
-import kz.chesschicken.cherrydrupe.function.FunctionEmpty;
+import kz.chesschicken.cherrydrupe.function.FunctionRET;
 import org.jetbrains.annotations.NotNull;
 
 public enum EnumJavaVersion {
+    /**
+     * Isn't supported by the library.
+     */
+    @Deprecated
     JAVA_6("Java 1.6", (short) 6),
+    /**
+     * Isn't supported by the library.
+     */
+    @Deprecated
     JAVA_7("Java 1.7", (short) 7),
     JAVA_8("Java 1.8", (short) 8),
     JAVA_9("Java 9", (short) 9),
@@ -26,7 +34,7 @@ public enum EnumJavaVersion {
         CODE = b;
     }
 
-    public static final EnumJavaVersion CURRENT_JAVA_VERSION = ((FunctionEmpty<EnumJavaVersion>) () -> {
+    public static final EnumJavaVersion CURRENT_JAVA_VERSION = ((FunctionRET<EnumJavaVersion>) () -> {
         String a = System.getProperty("java.version");
         a = a.startsWith("1.") ? a.substring(2, 3) : ((a.contains(".")) ? a.substring(0, a.indexOf(".")) : a);
         try {

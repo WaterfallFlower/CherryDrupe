@@ -1,6 +1,6 @@
 package kz.chesschicken.cherrydrupe.hijack.api;
 
-import kz.chesschicken.cherrydrupe.function.FunctionObjectArray;
+import kz.chesschicken.cherrydrupe.function.FunctionARRSETRET;
 import org.jetbrains.annotations.NotNull;
 
 public interface IMethodGenerator {
@@ -13,7 +13,7 @@ public interface IMethodGenerator {
      * @param <T> the method's return type.
      * @return An invoker function for the method.
      */
-    <T> @NotNull FunctionObjectArray<T> method$Virtual(
+    <T> @NotNull FunctionARRSETRET<T> method$Virtual(
             @NotNull Class<?> source,
             @NotNull String method_name,
             @NotNull Class<T> returnType,
@@ -29,7 +29,7 @@ public interface IMethodGenerator {
      * @param <T> the static method's return type.
      * @return An invoker function for the static method.
      */
-    <T> @NotNull FunctionObjectArray<T> method$Static(
+    <T> @NotNull FunctionARRSETRET<T> method$Static(
             @NotNull Class<?> source,
             @NotNull String method_name,
             @NotNull Class<T> returnType,
@@ -43,7 +43,7 @@ public interface IMethodGenerator {
      * @param <T> the constructor's return type.
      * @return An invoker function for the constructor.
      */
-    <T> @NotNull FunctionObjectArray<T> constructor$(
+    <T> @NotNull FunctionARRSETRET<T> constructor$(
             @NotNull Class<?> source,
             @NotNull Class<?>[] params
     );

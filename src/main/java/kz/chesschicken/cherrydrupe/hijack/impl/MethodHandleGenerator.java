@@ -1,7 +1,7 @@
 package kz.chesschicken.cherrydrupe.hijack.impl;
 
-import kz.chesschicken.cherrydrupe.function.FunctionEmpty;
-import kz.chesschicken.cherrydrupe.function.FunctionObjectArray;
+import kz.chesschicken.cherrydrupe.function.FunctionRET;
+import kz.chesschicken.cherrydrupe.function.FunctionARRSETRET;
 import kz.chesschicken.cherrydrupe.hijack.AbstractGenerator;
 import kz.chesschicken.cherrydrupe.hijack.api.IFieldGenerator;
 import kz.chesschicken.cherrydrupe.hijack.api.IMethodGenerator;
@@ -47,7 +47,7 @@ public class MethodHandleGenerator extends AbstractGenerator implements IFieldGe
     }
 
     @Override
-    public <T> @NotNull FunctionEmpty<T> fieldStatic$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public <T> @NotNull FunctionRET<T> fieldStatic$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return () -> {
             try {
                 //noinspection unchecked
@@ -71,7 +71,7 @@ public class MethodHandleGenerator extends AbstractGenerator implements IFieldGe
     }
 
     @Override
-    public <T> @NotNull FunctionObjectArray<T> method$Virtual(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
+    public <T> @NotNull FunctionARRSETRET<T> method$Virtual(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
         return o -> {
             try {
                 //noinspection unchecked
@@ -84,7 +84,7 @@ public class MethodHandleGenerator extends AbstractGenerator implements IFieldGe
     }
 
     @Override
-    public <T> @NotNull FunctionObjectArray<T> method$Static(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
+    public <T> @NotNull FunctionARRSETRET<T> method$Static(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
         return o -> {
             try {
                 MethodHandle a = getLookup().findStatic(source, method_name, MethodType.methodType(returnType, argumentsType));
@@ -98,7 +98,7 @@ public class MethodHandleGenerator extends AbstractGenerator implements IFieldGe
     }
 
     @Override
-    public <T> @NotNull FunctionObjectArray<T> constructor$(@NotNull Class<?> source, Class<?>[] params) {
+    public <T> @NotNull FunctionARRSETRET<T> constructor$(@NotNull Class<?> source, Class<?>[] params) {
         return objectTypeArgs -> {
             try {
                 //noinspection unchecked
