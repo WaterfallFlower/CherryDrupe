@@ -1,8 +1,9 @@
 # CherryDrupe
+[![](https://jitpack.io/v/ChessChicken-KZ/CherryDrupe.svg)](https://jitpack.io/#ChessChicken-KZ/CherryDrupe)
+<br>
 A set of tools that cause only pain.
 <br>
 Supports Java 8+.
-
 ## Current features:
 
 ### [InitAndApply](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/src/main/java/kz/chesschicken/cherrydrupe/InitAndApply.java)
