@@ -1,8 +1,8 @@
 package kz.chesschicken.cherrydrupe.hijack.impl;
 
+import kz.chesschicken.cherrydrupe.hijack.AbstractGenerator;
 import kz.chesschicken.cherrydrupe.function.FunctionRET;
 import kz.chesschicken.cherrydrupe.function.FunctionARRSETRET;
-import kz.chesschicken.cherrydrupe.hijack.AbstractGenerator;
 import kz.chesschicken.cherrydrupe.hijack.api.IFieldGenerator;
 import kz.chesschicken.cherrydrupe.hijack.api.IMethodGenerator;
 import org.jetbrains.annotations.NotNull;

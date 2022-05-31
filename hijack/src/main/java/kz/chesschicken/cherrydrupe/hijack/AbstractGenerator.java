@@ -1,6 +1,5 @@
 package kz.chesschicken.cherrydrupe.hijack;
 
-import kz.chesschicken.cherrydrupe.hijack.api.IFieldGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
