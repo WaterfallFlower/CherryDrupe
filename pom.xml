@@ -11,6 +11,7 @@
     <modules>
         <module>core</module>
         <module>hijack</module>
+        <module>packaging</module>
     </modules>
 
     <properties>
@@ -26,5 +27,6 @@
             <version>23.0.0</version>
         </dependency>
     </dependencies>
+
 
 </project>
