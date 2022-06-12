@@ -3,6 +3,7 @@ package kz.chesschicken.cherrydrupe.hijack.api;
 
 import kz.chesschicken.cherrydrupe.function.FunctionRET;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -22,7 +23,7 @@ public interface IFieldGenerator {
      * @param <T> the field's type.
      * @return A getter function for the field.
      */
-    <T> @NotNull Function<Object, T> field$Getter(
+    <T> @NotNull Function<@NotNull Object, @Nullable T> field$Getter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type
@@ -36,7 +37,7 @@ public interface IFieldGenerator {
      * @param <T> the field's type.
      * @return A setter function for the field.
      */
-    <T> @NotNull BiConsumer<Object, T> field$Setter(
+    <T> @NotNull BiConsumer<@NotNull Object, @Nullable T> field$Setter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type
@@ -50,7 +51,7 @@ public interface IFieldGenerator {
      * @param <T> the static field's type.
      * @return A getter function for the static field.
      */
-    <T> @NotNull FunctionRET<T> fieldStatic$Getter(
+    <T> @NotNull FunctionRET<@Nullable T> fieldStatic$Getter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type
@@ -64,7 +65,7 @@ public interface IFieldGenerator {
      * @param <T> the static field's type.
      * @return A setter function for the static field.
      */
-    <T> @NotNull Consumer<T> fieldStatic$Setter(
+    <T> @NotNull Consumer<@Nullable T> fieldStatic$Setter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type

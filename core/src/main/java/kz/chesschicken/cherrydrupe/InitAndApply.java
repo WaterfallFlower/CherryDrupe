@@ -31,7 +31,7 @@ public class InitAndApply {
      * @param <A> The instance's type.
      * @return The instance with executed consumer.
      */
-    public static<A> @NotNull A generate(@NotNull A instance, @NotNull InitAndApply.Acceptor<A> acceptor) {
+    public static<A> @NotNull A get(@NotNull A instance, @NotNull InitAndApply.Acceptor<A> acceptor) {
         acceptor.apply(instance);
         return instance;
     }

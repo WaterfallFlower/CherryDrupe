@@ -1,4 +1,4 @@
-package kz.chesschicken.cherrydrupe.stream;
+package kz.chesschicken.cherrydrupe;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 public class InJarStreamUtils {
 
     /**
-     * A method to read lines of the provided file.
+     * Read all lines in a given file.
      * @param home Class in jar file, where the file is also located.
      * @param file Path to the file.
-     * @return Lines of the file in {@link java.util.List<String>} format.
+     * @return Lines as {@link java.util.List<String>}.
      */
     public static @Nullable List<String> readStringFile(@NotNull Class<?> home, @NotNull String file) {
         try(InputStream is = home.getResourceAsStream(file)) {

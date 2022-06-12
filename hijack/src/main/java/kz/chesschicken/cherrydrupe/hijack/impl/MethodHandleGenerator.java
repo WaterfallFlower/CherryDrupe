@@ -6,6 +6,7 @@ import kz.chesschicken.cherrydrupe.function.FunctionARRSETRET;
 import kz.chesschicken.cherrydrupe.hijack.api.IFieldGenerator;
 import kz.chesschicken.cherrydrupe.hijack.api.IMethodGenerator;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodType;
@@ -23,7 +24,7 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getLookup;
 public class MethodHandleGenerator extends AbstractGenerator implements IFieldGenerator, IMethodGenerator {
 
     @Override
-    public <T> @NotNull Function<Object, T> field$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public <T> @NotNull Function<@NotNull Object, @Nullable  T> field$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return o -> {
             try {
                 //noinspection unchecked
@@ -36,7 +37,7 @@ public class MethodHandleGenerator extends AbstractGenerator implements IFieldGe
     }
 
     @Override
-    public <T> @NotNull BiConsumer<Object, T> field$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public <T> @NotNull BiConsumer<@NotNull Object, @Nullable T> field$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return (o, t) -> {
             try {
                 getLookup().findSetter(source, field_name, field_type).invoke(o, t);
@@ -47,7 +48,7 @@ public class MethodHandleGenerator extends AbstractGenerator implements IFieldGe
     }
 
     @Override
-    public <T> @NotNull FunctionRET<T> fieldStatic$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public <T> @NotNull FunctionRET<@Nullable T> fieldStatic$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return () -> {
             try {
                 //noinspection unchecked
@@ -60,7 +61,7 @@ public class MethodHandleGenerator extends AbstractGenerator implements IFieldGe
     }
 
     @Override
-    public <T> @NotNull Consumer<T> fieldStatic$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public <T> @NotNull Consumer<@Nullable T> fieldStatic$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return t -> {
             try {
                 getLookup().findStaticSetter(source, field_name, field_type).invoke(t);
@@ -71,7 +72,7 @@ public class MethodHandleGenerator extends AbstractGenerator implements IFieldGe
     }
 
     @Override
-    public <T> @NotNull FunctionARRSETRET<T> method$Virtual(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
+    public <T> @NotNull FunctionARRSETRET<@Nullable T> method$Virtual(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
         return o -> {
             try {
                 //noinspection unchecked
@@ -84,7 +85,7 @@ public class MethodHandleGenerator extends AbstractGenerator implements IFieldGe
     }
 
     @Override
-    public <T> @NotNull FunctionARRSETRET<T> method$Static(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
+    public <T> @NotNull FunctionARRSETRET<@Nullable T> method$Static(@NotNull Class<?> source, @NotNull String method_name, @NotNull Class<T> returnType, Class<?>... argumentsType) {
         return o -> {
             try {
                 MethodHandle a = getLookup().findStatic(source, method_name, MethodType.methodType(returnType, argumentsType));

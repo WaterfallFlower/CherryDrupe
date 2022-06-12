@@ -3,6 +3,10 @@ package kz.chesschicken.cherrydrupe.jcheck;
 import kz.chesschicken.cherrydrupe.function.FunctionRET;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * An enum list of java versions.
+ * @author ChessChicken-KZ
+ */
 public enum EnumJavaVersion {
     /**
      * Isn't supported by the library.
@@ -34,7 +38,7 @@ public enum EnumJavaVersion {
         CODE = b;
     }
 
-    public static final EnumJavaVersion CURRENT_JAVA_VERSION = ((FunctionRET<EnumJavaVersion>) () -> {
+    public static final @NotNull EnumJavaVersion CURRENT_JAVA_VERSION = ((FunctionRET<EnumJavaVersion>) () -> {
         String a = System.getProperty("java.version");
         a = a.startsWith("1.") ? a.substring(2, 3) : ((a.contains(".")) ? a.substring(0, a.indexOf(".")) : a);
         try {
