@@ -41,7 +41,7 @@ TryReturn<String, IOException> try1 = new TryReturn<String, IOException>() {
 };
 
 /* Launch it later... */
-try1.apply();
+System.out.println(try1.apply());
 ```
 
 ### [TransformTools](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/core/src/main/java/kz/chesschicken/cherrydrupe/TransformTools.java)
