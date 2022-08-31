@@ -2,8 +2,10 @@ package kz.chesschicken.cherrydrupe.hijack;
 
 /**
  * An enum with set of generator's behaviour when catching an exception.
+ * @deprecated Dependent on {@link GlobalExceptionProcessor}.
  * @author ChessChicken-KZ
  */
+@Deprecated
 public enum EnumExceptionBehaviour {
     /**
      * Skips all caught exceptions, straightly going forward.
