@@ -39,9 +39,7 @@ public class InJarStreamUtils {
      */
     public static @Nullable List<String> readStringFile(@NotNull Class<?> home, @NotNull String file) {
         try(InputStream is = home.getResourceAsStream(file)) {
-            if(is == null)
-                return null;
-            return new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
+            return is != null ? new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)).lines().collect(Collectors.toList()) : null;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -56,16 +54,12 @@ public class InJarStreamUtils {
      */
     public static byte @NotNull [] readBytesFile(@NotNull Class<?> home, @NotNull String file) {
         try(InputStream is = home.getResourceAsStream(file)) {
-            if(is == null)
-                return new byte[0];
-
+            if(is == null) return new byte[0];
             ByteArrayOutputStream s1 = new ByteArrayOutputStream();
             byte[] b = new byte[4096];
             int i;
-
             while ((i = is.read(b)) != -1)
                 s1.write(b, 0, i);
-
             return s1.toByteArray();
         } catch (IOException e) {
             e.printStackTrace();

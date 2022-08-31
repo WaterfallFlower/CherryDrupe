@@ -29,28 +29,29 @@ public enum EnumJavaVersion {
      * Isn't supported by the library.
      */
     @Deprecated
-    JAVA_6("Java 1.6", (short) 6),
+    JAVA_6("Java 1.6", (byte) 6),
     /**
      * Isn't supported by the library.
      */
     @Deprecated
-    JAVA_7("Java 1.7", (short) 7),
-    JAVA_8("Java 1.8", (short) 8),
-    JAVA_9("Java 9", (short) 9),
-    JAVA_10("Java 10", (short) 10),
-    JAVA_11("Java 11", (short) 11),
-    JAVA_12("Java 12", (short) 12),
-    JAVA_13("Java 13", (short) 13),
-    JAVA_14("Java 14", (short) 14),
-    JAVA_15("Java 15", (short) 15),
-    JAVA_16("Java 16", (short) 16),
-    JAVA_17("Java 17", (short) 17),
-    JAVA_18("Java 18", (short) 18),
-    UNKNOWN("Unknown", Short.MAX_VALUE);
+    JAVA_7("Java 1.7", (byte) 7),
+    JAVA_8("Java 1.8", (byte) 8),
+    JAVA_9("Java 9", (byte) 9),
+    JAVA_10("Java 10", (byte) 10),
+    JAVA_11("Java 11", (byte) 11),
+    JAVA_12("Java 12", (byte) 12),
+    JAVA_13("Java 13", (byte) 13),
+    JAVA_14("Java 14", (byte) 14),
+    JAVA_15("Java 15", (byte) 15),
+    JAVA_16("Java 16", (byte) 16),
+    JAVA_17("Java 17", (byte) 17),
+    JAVA_18("Java 18", (byte) 18),
+    UNKNOWN("Unknown", Byte.MAX_VALUE);
 
     public final String HUMAN_READABLE_NAME;
-    public final short CODE;
-    EnumJavaVersion(String a, short b) {
+    public final byte CODE;
+
+    EnumJavaVersion(String a, byte b) {
         HUMAN_READABLE_NAME = a;
         CODE = b;
     }
@@ -67,10 +68,8 @@ public enum EnumJavaVersion {
 
     @SuppressWarnings("UseCompareMethod")
     public static byte compareJavaVersions(@NotNull EnumJavaVersion a, @NotNull EnumJavaVersion b) {
-        if(a.CODE < b.CODE)
-            return -1;
-        if(a.CODE > b.CODE)
-            return 1;
+        if(a.CODE < b.CODE) return -1;
+        if(a.CODE > b.CODE) return 1;
         return 0;
     }
 }
