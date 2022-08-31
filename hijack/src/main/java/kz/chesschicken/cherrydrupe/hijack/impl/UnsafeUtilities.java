@@ -13,26 +13,60 @@ import java.util.function.Function;
 import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getUnsafe;
 
 /**
- * The implementation of {@link GlobalExceptionProcessor} with {@link sun.misc.Unsafe}.
+ * The more intelligent and easy to use {@link sun.misc.Unsafe} wrapper.
  * @author ChessChicken-KZ
  */
-public class UnsafeGenerator {
+public class UnsafeUtilities {
 
+    /**
+     * A method that will try to get a value from specified field.
+     * @param source Class where the field is located.
+     * @param field_name Field's name.
+     * @param instance Instance of the class where the field is located.
+     * @param <T> Return type.
+     * @return A value of specified field with specified return type.
+     * @throws NoSuchFieldException Will be thrown if field with given name doesn't exist.
+     */
     public static <T> @Nullable T getField(@NotNull Class<?> source, @NotNull String field_name, @NotNull Object instance) throws NoSuchFieldException {
         //noinspection unchecked
         return (T) getUnsafe().getObject(instance, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)));
     }
 
+    /**
+     * A method that will try to get a value from specified static field.
+     * @param source Class where the static field is located.
+     * @param field_name Static field's name.
+     * @param <T> Return type.
+     * @return A value of specified static field with specified return type.
+     * @throws NoSuchFieldException Will be thrown if field with given name doesn't exist.
+     */
     public static <T> @Nullable T getStaticField(@NotNull Class<?> source, @NotNull String field_name) throws NoSuchFieldException {
         Field f = source.getDeclaredField(field_name);
         //noinspection unchecked
         return (T) getUnsafe().getObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f));
     }
 
+    /**
+     * A method that will try to set specified field with given value.
+     * @param source Class where the field is located.
+     * @param field_name Field's name.
+     * @param instance Instance of the class where the field is located.
+     * @param value A new value for the field.
+     * @param <T> The new value's type.
+     * @throws NoSuchFieldException Will be thrown if field with given name doesn't exist.
+     */
     public static <T> void setField(@NotNull Class<?> source, @NotNull String field_name, @NotNull Object instance, @Nullable T value) throws NoSuchFieldException {
         getUnsafe().putObject(instance, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)), value);
     }
 
+    /**
+     * A method that will try to set specified static field with given value.
+     * @param source Class where the static field is located.
+     * @param field_name Static field's name.
+     * @param value A new value for the static field.
+     * @param <T> The new value's type.
+     * @throws NoSuchFieldException Will be thrown if static field with given name doesn't exist.
+     */
     public static <T> void setStaticField(@NotNull Class<?> source, @NotNull String field_name, @Nullable T value) throws NoSuchFieldException {
         Field f = source.getDeclaredField(field_name);
         getUnsafe().putObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f), value);
