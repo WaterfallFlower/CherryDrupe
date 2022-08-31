@@ -20,9 +20,13 @@ package kz.chesschicken.cherrydrupe.jcheck;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A utility class for Java version checking tools.
- * <br>
- * For enum list, look at {@link EnumJavaVersion}.
+ * The utility class with Java version check methods.
+ * <p>
+ *     For enum list, look at {@link EnumJavaVersion}.
+ * </p>
+ * @author ChessChicken-KZ
+ * @see EnumJavaVersion
+ * @see UnsupportedJavaVersionException
  */
 public class JavaCheck {
 

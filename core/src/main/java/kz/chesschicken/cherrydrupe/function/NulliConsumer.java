@@ -18,8 +18,9 @@
 package kz.chesschicken.cherrydrupe.function;
 
 /**
- * An interface method, applies no arguments and returns void.
+ * A functional interface which applies no arguments and returns void.
  * @author ChessChicken-KZ
+ * @since 0.1
  */
 @FunctionalInterface
 public interface NulliConsumer {

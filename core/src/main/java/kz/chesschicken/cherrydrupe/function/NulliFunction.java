@@ -18,9 +18,10 @@
 package kz.chesschicken.cherrydrupe.function;
 
 /**
- * An interface function with no arguments, but with return.
- * @param <O> return type.
+ * A functional interface with no arguments and with specific return.
+ * @param <O> Return type.
  * @author ChessChicken-KZ
+ * @since 0.1
  */
 @FunctionalInterface
 public interface NulliFunction<O> {

@@ -18,12 +18,13 @@
 package kz.chesschicken.cherrydrupe.function;
 
 /**
- * An interface functions with 3 arguments and 1 return value.
+ * A functional interface with three different arguments and specific return value.
  * @param <A> First argument's type.
  * @param <B> Second argument's type.
  * @param <C> Third argument's type.
- * @param <R> Return argument's type.
+ * @param <R> Return type.
  * @author ChessChicken-KZ
+ * @since 0.1
  */
 @FunctionalInterface
 public interface TerFunction<A, B, C, R> {

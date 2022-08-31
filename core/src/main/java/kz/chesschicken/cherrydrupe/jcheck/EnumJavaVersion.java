@@ -21,8 +21,9 @@ import kz.chesschicken.cherrydrupe.function.NulliFunction;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An enum list of java versions.
+ * An enum list with java versions, starting from 1.6 till 18.
  * @author ChessChicken-KZ
+ * @since 0.1
  */
 public enum EnumJavaVersion {
     /** Isn't supported by the library. */
@@ -42,14 +43,17 @@ public enum EnumJavaVersion {
     JAVA_16("Java 16", (byte) 16),
     JAVA_17("Java 17", (byte) 17),
     JAVA_18("Java 18", (byte) 18),
-    UNKNOWN("Unknown", Byte.MAX_VALUE);
+    /** Only being chosen by system if the Java Runtime version is newer that any available in enum list. */
+    NEWER_VERSION("Unknown New Version", Byte.MAX_VALUE),
+    /** Unknown Java version. */
+    UNKNOWN("Unknown", Byte.MIN_VALUE);
 
-    public final String HUMAN_READABLE_NAME;
-    public final byte CODE;
+    public final String readable;
+    public final byte version;
 
     EnumJavaVersion(String a, byte b) {
-        HUMAN_READABLE_NAME = a;
-        CODE = b;
+        readable = a;
+        version = b;
     }
 
     public static final @NotNull EnumJavaVersion CURRENT_JAVA_VERSION = ((NulliFunction<EnumJavaVersion>) () -> {
@@ -58,14 +62,14 @@ public enum EnumJavaVersion {
         try {
             return EnumJavaVersion.valueOf("JAVA_" + a);
         } catch (IllegalArgumentException e) {
-            return EnumJavaVersion.UNKNOWN;
+            return Byte.parseByte(a) > EnumJavaVersion.JAVA_18.version ? EnumJavaVersion.NEWER_VERSION : EnumJavaVersion.UNKNOWN;
         }
     }).apply();
 
     @SuppressWarnings("UseCompareMethod")
     public static byte compareJavaVersions(@NotNull EnumJavaVersion a, @NotNull EnumJavaVersion b) {
-        if(a.CODE < b.CODE) return -1;
-        if(a.CODE > b.CODE) return 1;
+        if(a.version < b.version) return -1;
+        if(a.version > b.version) return 1;
         return 0;
     }
 }
