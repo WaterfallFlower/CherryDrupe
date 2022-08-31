@@ -4,18 +4,18 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A fundament for generator implementations.
+ * A simple exception processor for
  * @author ChessChicken-KZ
  */
-public abstract class AbstractGenerator {
+public class GlobalExceptionProcessor {
 
     /**
      * A method that resets all the properties set in generator.
      */
-    public void resetProperties() {
-        this.EXCEPTION_BEHAVIOUR = EnumExceptionBehaviour.PRINT_EXCEPTION;
-        this.EXCEPTION_HANDLE = null;
-        this.DEFAULT_NULL_VALUE = null;
+    public static void resetProperties() {
+        EXCEPTION_BEHAVIOUR = EnumExceptionBehaviour.PRINT_EXCEPTION;
+        EXCEPTION_HANDLE = null;
+        DEFAULT_NULL_VALUE = null;
     }
 
     /**
@@ -24,16 +24,16 @@ public abstract class AbstractGenerator {
      * See {@link EnumExceptionBehaviour} for possible behaviours.
      * @param a an enum state, representing exception behaviour.
      */
-    public void setExceptionBehaviour(@NotNull EnumExceptionBehaviour a) {
-        this.EXCEPTION_BEHAVIOUR = a;
+    public static void setExceptionBehaviour(@NotNull EnumExceptionBehaviour a) {
+        EXCEPTION_BEHAVIOUR = a;
     }
 
     /**
      * A method to get value from field that contains throwable.
      * @return "null" if empty or some {@link Throwable} value.
      */
-    public @Nullable Throwable throwable() {
-        return this.EXCEPTION_HANDLE;
+    public static @Nullable Throwable throwable() {
+        return EXCEPTION_HANDLE;
     }
 
     /**
@@ -43,12 +43,12 @@ public abstract class AbstractGenerator {
      * @param t an object to replace with.
      * @param <T> some generic type of the object.
      */
-    public <T> void setDefaultNullValue(@Nullable T t) {
-        this.DEFAULT_NULL_VALUE = t;
+    public static <T> void setDefaultNullValue(@Nullable T t) {
+        DEFAULT_NULL_VALUE = t;
     }
 
-    protected void __processException(@NotNull Throwable e) {
-        switch (this.EXCEPTION_BEHAVIOUR) {
+    public static void processException(@NotNull Throwable e) {
+        switch (EXCEPTION_BEHAVIOUR) {
             case SKIP_EXCEPTION:
                 return;
             case PRINT_EXCEPTION: {
@@ -56,7 +56,7 @@ public abstract class AbstractGenerator {
                 break;
             }
             case CATCH_EXCEPTION: {
-                this.EXCEPTION_HANDLE = e;
+                EXCEPTION_HANDLE = e;
                 break;
             }
             case THROW_EXCEPTION: {
@@ -66,11 +66,11 @@ public abstract class AbstractGenerator {
     }
 
     @SuppressWarnings("unchecked")
-    protected <T> @Nullable T __nullValue() {
-        return (T) this.DEFAULT_NULL_VALUE;
+    public static <T> @Nullable T safeNullValue() {
+        return (T) DEFAULT_NULL_VALUE;
     }
 
-    EnumExceptionBehaviour EXCEPTION_BEHAVIOUR = EnumExceptionBehaviour.PRINT_EXCEPTION;
-    Throwable EXCEPTION_HANDLE = null;
-    Object DEFAULT_NULL_VALUE = null;
+    static EnumExceptionBehaviour EXCEPTION_BEHAVIOUR = EnumExceptionBehaviour.PRINT_EXCEPTION;
+    static Throwable EXCEPTION_HANDLE = null;
+    static Object DEFAULT_NULL_VALUE = null;
 }

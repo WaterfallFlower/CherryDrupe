@@ -14,7 +14,7 @@ public enum EnumExceptionBehaviour {
      */
     PRINT_EXCEPTION,
     /**
-     * When catching an exception, it stores it in {@link AbstractGenerator#EXCEPTION_HANDLE}, that can be accessed later by {@link AbstractGenerator#throwable()} method.
+     * When catching an exception, it stores it in {@link GlobalExceptionProcessor#EXCEPTION_HANDLE}, that can be accessed later by {@link GlobalExceptionProcessor#throwable()} method.
      */
     CATCH_EXCEPTION,
     /**

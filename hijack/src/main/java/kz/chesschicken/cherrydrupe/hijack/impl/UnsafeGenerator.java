@@ -1,8 +1,7 @@
 package kz.chesschicken.cherrydrupe.hijack.impl;
 
-import kz.chesschicken.cherrydrupe.hijack.AbstractGenerator;
+import kz.chesschicken.cherrydrupe.hijack.GlobalExceptionProcessor;
 import kz.chesschicken.cherrydrupe.function.FunctionRET;
-import kz.chesschicken.cherrydrupe.hijack.api.IFieldGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,57 +13,73 @@ import java.util.function.Function;
 import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getUnsafe;
 
 /**
- * The implementation of {@link AbstractGenerator} with {@link sun.misc.Unsafe}.
+ * The implementation of {@link GlobalExceptionProcessor} with {@link sun.misc.Unsafe}.
  * @author ChessChicken-KZ
  */
-public class UnsafeGenerator extends AbstractGenerator implements IFieldGenerator {
+public class UnsafeGenerator {
 
-    @Override
-    public @NotNull <T> Function<@NotNull Object, @Nullable T> field$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public static <T> @Nullable T getField(@NotNull Class<?> source, @NotNull String field_name, @NotNull Object instance) throws NoSuchFieldException {
+        //noinspection unchecked
+        return (T) getUnsafe().getObject(instance, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)));
+    }
+
+    public static <T> @Nullable T getStaticField(@NotNull Class<?> source, @NotNull String field_name) throws NoSuchFieldException {
+        Field f = source.getDeclaredField(field_name);
+        //noinspection unchecked
+        return (T) getUnsafe().getObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f));
+    }
+
+    public static <T> void setField(@NotNull Class<?> source, @NotNull String field_name, @NotNull Object instance, @Nullable T value) throws NoSuchFieldException {
+        getUnsafe().putObject(instance, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)), value);
+    }
+
+    public static <T> void setStaticField(@NotNull Class<?> source, @NotNull String field_name, @Nullable T value) throws NoSuchFieldException {
+        Field f = source.getDeclaredField(field_name);
+        getUnsafe().putObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f), value);
+    }
+
+    public static @NotNull <T> Function<@NotNull Object, @Nullable T> generateGetter(@NotNull Class<?> source, @NotNull String field_name) {
         return o -> {
             try {
                 //noinspection unchecked
                 return (T) getUnsafe().getObject(o, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)));
             } catch (NoSuchFieldException e) {
-                __processException(e);
-                return __nullValue();
+                GlobalExceptionProcessor.processException(e);
+                return GlobalExceptionProcessor.safeNullValue();
             }
         };
     }
 
-    @Override
-    public @NotNull <T> BiConsumer<@NotNull Object, @Nullable  T> field$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public static @NotNull <T> BiConsumer<@NotNull Object, @Nullable  T> generateSetter(@NotNull Class<?> source, @NotNull String field_name) {
         return (o, t) -> {
             try {
                 getUnsafe().putObject(o, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)), t);
             } catch (NoSuchFieldException e) {
-                __processException(e);
+                GlobalExceptionProcessor.processException(e);
             }
         };
     }
 
-    @Override
-    public @NotNull <T> FunctionRET<@Nullable T> fieldStatic$Getter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public static @NotNull <T> FunctionRET<@Nullable T> generateStaticGetter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return () -> {
             try {
                 Field f = source.getDeclaredField(field_name);
                 //noinspection unchecked
                 return (T) getUnsafe().getObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f));
             } catch (NoSuchFieldException e) {
-                __processException(e);
-                return __nullValue();
+                GlobalExceptionProcessor.processException(e);
+                return GlobalExceptionProcessor.safeNullValue();
             }
         };
     }
 
-    @Override
-    public @NotNull <T> Consumer<@Nullable T> fieldStatic$Setter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
+    public static @NotNull <T> Consumer<@Nullable T> generateStaticSetter(@NotNull Class<?> source, @NotNull String field_name, @NotNull Class<T> field_type) {
         return t -> {
             try {
                 Field f = source.getDeclaredField(field_name);
                 getUnsafe().putObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f), t);
             } catch (NoSuchFieldException e) {
-                __processException(e);
+                GlobalExceptionProcessor.processException(e);
             }
         };
     }
