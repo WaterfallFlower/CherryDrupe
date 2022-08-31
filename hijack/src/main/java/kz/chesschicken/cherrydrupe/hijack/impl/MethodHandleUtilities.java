@@ -23,7 +23,7 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getLookup;
  * @author ChessChicken-KZ
  * @since 0.2
  */
-public class MethodHandleGenerator {
+public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of field's getter. The method provides safe "exception" function.

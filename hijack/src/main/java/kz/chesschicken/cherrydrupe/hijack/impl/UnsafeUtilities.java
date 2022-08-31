@@ -50,7 +50,7 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getUnsafe;
  * </p>
  *
  * @author ChessChicken-KZ
- * @see MethodHandleGenerator Wrapper for MethodHandle.Lookup.
+ * @see MethodHandleUtilities Wrapper for MethodHandle.Lookup.
  * @since 0.2
  */
 public class UnsafeUtilities {
