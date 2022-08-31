@@ -74,8 +74,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that will try to get a value from specified field.
-     * @param source Class where the field is located.
-     * @param field_name Field's name.
+     * @param source A class where the field is located.
+     * @param field_name The field's name.
      * @param instance Instance of the class where the field is located.
      * @param <T> Return type.
      * @return A value of specified field with specified return type.
@@ -89,8 +89,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that will try to get a value from specified static field.
-     * @param source Class where the static field is located.
-     * @param field_name Static field's name.
+     * @param source A class where the static field is located.
+     * @param field_name The static field's name.
      * @param <T> Return type.
      * @return A value of specified static field with specified return type.
      * @throws NoSuchFieldException Will be thrown if field with given name doesn't exist.
@@ -104,8 +104,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that will try to set specified field with given value.
-     * @param source Class where the field is located.
-     * @param field_name Field's name.
+     * @param source A class where the field is located.
+     * @param field_name The field's name.
      * @param instance Instance of the class where the field is located.
      * @param value A new value for the field.
      * @param <T> The new value's type.
@@ -118,8 +118,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that will try to set specified static field with given value.
-     * @param source Class where the static field is located.
-     * @param field_name Static field's name.
+     * @param source A class where the static field is located.
+     * @param field_name The static field's name.
      * @param value A new value for the static field.
      * @param <T> The new value's type.
      * @throws NoSuchFieldException Will be thrown if static field with given name doesn't exist.
@@ -132,8 +132,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that generates a function of field's getter. The method provides safe "exception" function.
-     * @param source Class where the field is located.
-     * @param field_name Field's name.
+     * @param source A class where the field is located.
+     * @param field_name The field's name.
      * @param onException A function that will be executed when if <tt>NoSuchFieldException</tt> is caught.
      * @param <T> The getter value's type.
      * @return A function that will handle getter of field.
@@ -155,8 +155,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that generates a function of field's getter.
-     * @param source Class where the field is located.
-     * @param field_name Field's name.
+     * @param source A class where the field is located.
+     * @param field_name The field's name.
      * @param <T> The getter value's type.
      * @return A function that will handle getter of field.
      */
@@ -167,8 +167,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that generates a function of field's setter. The method provides safe "exception" function.
-     * @param source Class where the field is located.
-     * @param field_name Field's name.
+     * @param source A class where the field is located.
+     * @param field_name The field's name.
      * @param onException A function that will be executed when if <tt>NoSuchFieldException</tt> is caught.
      * @param <T> The setter value's type.
      * @return A function that will handle setter of field.
@@ -187,8 +187,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that generates a function of field's setter.
-     * @param source Class where the field is located.
-     * @param field_name Field's name.
+     * @param source A class where the field is located.
+     * @param field_name The field's name.
      * @param <T> The setter value's type.
      * @return A function that will handle setter of field.
      */
@@ -199,8 +199,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that generates a function of static field's getter. The method provides safe "exception" function.
-     * @param source Class where the static field is located.
-     * @param field_name Static field's name.
+     * @param source A class where the static field is located.
+     * @param field_name The static field's name.
      * @param onException A function that will be executed when if <tt>NoSuchFieldException</tt> is caught.
      * @param <T> The return value's type.
      * @return A function that will handle getter of static field.
@@ -223,8 +223,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that generates a function of static field's getter.
-     * @param source Class where the static field is located.
-     * @param field_name Static field's name.
+     * @param source A class where the static field is located.
+     * @param field_name The static field's name.
      * @param <T> The return value's type.
      * @return A function that will handle getter of static field.
      */
@@ -235,8 +235,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that generates a function of static field's setter. The method provides safe "exception" function.
-     * @param source Class where the static field is located.
-     * @param field_name Static field's name.
+     * @param source A class where the static field is located.
+     * @param field_name The static field's name.
      * @param onException A function that will be executed when if <tt>NoSuchFieldException</tt> is caught.
      * @param <T> The setter value's type.
      * @return A function that will handle setter of static field.
@@ -256,8 +256,8 @@ public class UnsafeUtilities {
 
     /**
      * A method that generates a function of static field's setter.
-     * @param source Class where the static field is located.
-     * @param field_name Static field's name.
+     * @param source A class where the static field is located.
+     * @param field_name The static field's name.
      * @param <T> The setter value's type.
      * @return A function that will handle setter of static field.
      */
