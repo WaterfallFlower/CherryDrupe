@@ -7,11 +7,11 @@
     <parent>
         <artifactId>CherryDrupe</artifactId>
         <groupId>kz.chesschicken</groupId>
-        <version>0.1.0</version>
+        <version>0.2</version>
     </parent>
 
     <artifactId>cherrydrupe-core</artifactId>
-    <version>0.1.0</version>
+    <version>0.2</version>
     <name>core</name>
     <packaging>jar</packaging>
 

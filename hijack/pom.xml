@@ -7,11 +7,11 @@
   <parent>
     <artifactId>CherryDrupe</artifactId>
     <groupId>kz.chesschicken</groupId>
-    <version>0.1.0</version>
+    <version>0.2</version>
   </parent>
 
   <artifactId>cherrydrupe-hijack</artifactId>
-  <version>0.1.0</version>
+  <version>0.2</version>
   <name>hijack</name>
   <packaging>jar</packaging>
 
@@ -25,7 +25,7 @@
     <dependency>
       <groupId>kz.chesschicken</groupId>
       <artifactId>cherrydrupe-core</artifactId>
-      <version>0.1.0</version>
+      <version>0.2</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
