@@ -5,8 +5,10 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * A simple exception processor for
+ * @deprecated Methods should provide own context or special processors.
  * @author ChessChicken-KZ
  */
+@Deprecated
 public class GlobalExceptionProcessor {
 
     /**
