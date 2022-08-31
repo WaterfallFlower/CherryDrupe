@@ -63,6 +63,7 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getLookup;
  *     </ul>
  * </p>
  * @author ChessChicken-KZ
+ * @see UnsafeUtilities Wrapper for Unsafe.
  * @since 0.2
  */
 public class MethodHandleUtilities {
