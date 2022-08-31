@@ -1,6 +1,5 @@
 package kz.chesschicken.cherrydrupe.hijack.impl;
 
-import kz.chesschicken.cherrydrupe.hijack.GlobalExceptionProcessor;
 import kz.chesschicken.cherrydrupe.function.FunctionRET;
 import kz.chesschicken.cherrydrupe.function.FunctionARRSETRET;
 import org.jetbrains.annotations.NotNull;
