@@ -19,6 +19,7 @@ package kz.chesschicken.cherrydrupe.hijack.impl;
 
 import kz.chesschicken.cherrydrupe.function.FunctionRET;
 import kz.chesschicken.cherrydrupe.function.FunctionARRSETRET;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,6 +38,30 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getLookup;
  *     After a heavy refactor of the library methods became static and now you can access without creating "dynamic context".
  *     Methods which generate functions are provided with and without safe "exception process" function.
  * </p>
+ *
+ * <p>
+ *     List of methods generators:
+ *     <ul>
+ *         <li>Getting field (exception process): {@link MethodHandleUtilities#generateFieldGetter(Class, String, Class, Function)}.</li>
+ *         <li>Getting field: {@link MethodHandleUtilities#generateFieldGetter(Class, String, Class)}.</li>
+ *         <li>Getting static field (exception process): {@link MethodHandleUtilities#generateStaticFieldGetter(Class, String, Class, Function)}.</li>
+ *         <li>Getting static field: {@link MethodHandleUtilities#generateStaticFieldGetter(Class, String, Class)}.</li>
+ *
+ *         <li>Setting field (exception process): {@link MethodHandleUtilities#generateFieldSetter(Class, String, Class, Consumer)}.</li>
+ *         <li>Setting field: {@link MethodHandleUtilities#generateFieldSetter(Class, String, Class)}.</li>
+ *         <li>Setting static field (exception process): {@link MethodHandleUtilities#generateStaticFieldSetter(Class, String, Class, Consumer)}.</li>
+ *         <li>Setting static field: {@link MethodHandleUtilities#generateStaticFieldSetter(Class, String, Class)}.</li>
+ *
+ *         <li>Constructor (exception process): {@link MethodHandleUtilities#generateConstructor(Class, Class[], Function)}.</li>
+ *         <li>Constructor: {@link MethodHandleUtilities#generateConstructor(Class, Class[])}.</li>
+ *
+ *         <li>Method accessor (exception process): {@link MethodHandleUtilities#generateMethod(Class, String, Class, Class[], Function)}.</li>
+ *         <li>Method accessor: {@link MethodHandleUtilities#generateMethod(Class, String, Class, Class[])}.</li>
+ *
+ *         <li>Static method accessor (exception process): {@link MethodHandleUtilities#generateStaticMethod(Class, String, Class, Class[], Function)}.</li>
+ *         <li>Static method accessor: {@link MethodHandleUtilities#generateStaticMethod(Class, String, Class, Class[])}.</li>
+ *     </ul>
+ * </p>
  * @author ChessChicken-KZ
  * @since 0.2
  */
@@ -51,6 +76,7 @@ public class MethodHandleUtilities {
      * @param <T> The field's type.
      * @return A function that will handle getter of the field.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull Function<@NotNull Object, @Nullable T> generateFieldGetter(
             @NotNull Class<?> source,
             @NotNull String field_name,
@@ -78,6 +104,7 @@ public class MethodHandleUtilities {
      * @param <T> The field's type.
      * @return A function that will handle getter of the field.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull Function<@NotNull Object, @Nullable T> generateFieldGetter(
             @NotNull Class<?> source,
             @NotNull String field_name,
@@ -95,6 +122,7 @@ public class MethodHandleUtilities {
      * @param <T> The field's type.
      * @return A function that will handle setter of the field.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull BiConsumer<@NotNull Object, @Nullable T> generateFieldSetter(
             @NotNull Class<?> source,
             @NotNull String field_name,
@@ -120,6 +148,7 @@ public class MethodHandleUtilities {
      * @param <T> The field's type.
      * @return A function that will handle setter of the field.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull BiConsumer<@NotNull Object, @Nullable T> generateFieldSetter(
             @NotNull Class<?> source,
             @NotNull String field_name,
@@ -137,6 +166,7 @@ public class MethodHandleUtilities {
      * @param <T> The static field's type.
      * @return A function that will handle getter of the static field.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull FunctionRET<@Nullable T> generateStaticFieldGetter(
             @NotNull Class<?> source,
             @NotNull String field_name,
@@ -164,6 +194,7 @@ public class MethodHandleUtilities {
      * @param <T> The static field's type.
      * @return A function that will handle getter of the static field.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull FunctionRET<@Nullable T> generateStaticFieldGetter(
             @NotNull Class<?> source,
             @NotNull String field_name,
@@ -172,6 +203,16 @@ public class MethodHandleUtilities {
         return generateStaticFieldGetter(source, field_name, field_type, null);
     }
 
+    /**
+     * A method that generates a function of static field's setter. The method provides safe "exception" function.
+     * @param source A class where the static field is located.
+     * @param field_name The static field's name.
+     * @param field_type The static field's type class.
+     * @param onException A function that will be executed when if <tt>Throwable</tt> is caught.
+     * @param <T> The static field's type.
+     * @return A function that will handle setter of the static field.
+     */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull Consumer<@Nullable T> generateStaticFieldSetter(
             @NotNull Class<?> source,
             @NotNull String field_name,
@@ -189,6 +230,23 @@ public class MethodHandleUtilities {
     }
 
     /**
+     * A method that generates a function of static field's setter. The method provides safe "exception" function.
+     * @param source A class where the static field is located.
+     * @param field_name The static field's name.
+     * @param field_type The static field's type class.
+     * @param <T> The static field's type.
+     * @return A function that will handle setter of the static field.
+     */
+    @ApiStatus.AvailableSince("0.2")
+    public static <T> @NotNull Consumer<@Nullable T> generateStaticFieldSetter(
+            @NotNull Class<?> source,
+            @NotNull String field_name,
+            @NotNull Class<T> field_type
+    ) {
+        return generateStaticFieldSetter(source, field_name, field_type, null);
+    }
+
+    /**
      * A method that generates a function of method's accessor. The method provides safe "exception" function.
      * @param source A class where the method is located.
      * @param method_name The method's name.
@@ -198,6 +256,7 @@ public class MethodHandleUtilities {
      * @param <T> The method's return type.
      * @return A function that will handle accessor of the method.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull FunctionARRSETRET<@Nullable T> generateMethod(
             @NotNull Class<?> source,
             @NotNull String method_name,
@@ -227,6 +286,7 @@ public class MethodHandleUtilities {
      * @param <T> The method's return type.
      * @return A function that will handle accessor of the method.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull FunctionARRSETRET<@Nullable T> generateMethod(
             @NotNull Class<?> source,
             @NotNull String method_name,
@@ -246,6 +306,7 @@ public class MethodHandleUtilities {
      * @param <T> The static method's return type.
      * @return A function that will handle accessor of the static method.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull FunctionARRSETRET<@Nullable T> generateStaticMethod(
             @NotNull Class<?> source,
             @NotNull String method_name,
@@ -276,6 +337,7 @@ public class MethodHandleUtilities {
      * @param <T> The static method's return type.
      * @return A function that will handle accessor of the static method.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull FunctionARRSETRET<@Nullable T> generateStaticMethod(
             @NotNull Class<?> source,
             @NotNull String method_name,
@@ -293,6 +355,7 @@ public class MethodHandleUtilities {
      * @param <T> The constructor's class type.
      * @return A function that will handle class generation via constructor.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull FunctionARRSETRET<T> generateConstructor(
             @NotNull Class<T> source,
             Class<?>[] params,
@@ -318,6 +381,7 @@ public class MethodHandleUtilities {
      * @param <T> The constructor's class type.
      * @return A function that will handle class generation via constructor.
      */
+    @ApiStatus.AvailableSince("0.2")
     public static <T> @NotNull FunctionARRSETRET<T> generateConstructor(
             @NotNull Class<T> source,
             Class<?>[] params
