@@ -1,6 +1,5 @@
 package kz.chesschicken.cherrydrupe.hijack.impl;
 
-import kz.chesschicken.cherrydrupe.hijack.GlobalExceptionProcessor;
 import kz.chesschicken.cherrydrupe.function.FunctionRET;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -39,10 +38,14 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getUnsafe;
  * <p>
  *     List of methods generators:
  *     <ul>
- *         <li>Getting field: {@link UnsafeUtilities#generateGetter(Class, String)}.</li>
- *         <li>Getting static field: {@link UnsafeUtilities#generateStaticGetter(Class, String)}.</li>
- *         <li>Setting field: {@link UnsafeUtilities#generateSetter(Class, String)}.</li>
- *         <li>Setting static field: {@link UnsafeUtilities#generateStaticSetter(Class, String)}.</li>
+ *         <li>Getting field (exception process): {@link UnsafeUtilities#generateFieldGetter(Class, String, Function)}</li>
+ *         <li>Getting field: {@link UnsafeUtilities#generateFieldGetter(Class, String)}.</li>
+ *         <li>Getting static field (exception process): {@link UnsafeUtilities#generateStaticFieldGetter(Class, String, Function)}.</li>
+ *         <li>Getting static field: {@link UnsafeUtilities#generateStaticFieldGetter(Class, String)}.</li>
+ *         <li>Setting field (exception process): {@link UnsafeUtilities#generateFieldSetter(Class, String, Consumer)}.</li>
+ *         <li>Setting field: {@link UnsafeUtilities#generateFieldSetter(Class, String)}.</li>
+ *         <li>Setting static field (exception process): {@link UnsafeUtilities#generateStaticFieldSetter(Class, String, Consumer)}.</li>
+ *         <li>Setting static field: {@link UnsafeUtilities#generateStaticFieldSetter(Class, String)}.</li>
  *     </ul>
  * </p>
  *
@@ -119,7 +122,7 @@ public class UnsafeUtilities {
      * @return A function that will handle getter of field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> Function<@NotNull Object, @Nullable T> generateGetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Function<NoSuchFieldException, T> onException) {
+    public static @NotNull <T> Function<@NotNull Object, @Nullable T> generateFieldGetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Function<NoSuchFieldException, T> onException) {
         return o -> {
             try {
                 //noinspection unchecked
@@ -141,8 +144,8 @@ public class UnsafeUtilities {
      * @return A function that will handle getter of field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> Function<@NotNull Object, @Nullable T> generateGetter(@NotNull Class<?> source, @NotNull String field_name) {
-        return generateGetter(source, field_name, null);
+    public static @NotNull <T> Function<@NotNull Object, @Nullable T> generateFieldGetter(@NotNull Class<?> source, @NotNull String field_name) {
+        return generateFieldGetter(source, field_name, null);
     }
 
     /**
@@ -154,7 +157,7 @@ public class UnsafeUtilities {
      * @return A function that will handle setter of field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> BiConsumer<@NotNull Object, @Nullable  T> generateSetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Consumer<NoSuchFieldException> onException) {
+    public static @NotNull <T> BiConsumer<@NotNull Object, @Nullable  T> generateFieldSetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Consumer<NoSuchFieldException> onException) {
         return (o, t) -> {
             try {
                 getUnsafe().putObject(o, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)), t);
@@ -173,8 +176,8 @@ public class UnsafeUtilities {
      * @return A function that will handle setter of field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> BiConsumer<@NotNull Object, @Nullable  T> generateSetter(@NotNull Class<?> source, @NotNull String field_name) {
-        return generateSetter(source, field_name, null);
+    public static @NotNull <T> BiConsumer<@NotNull Object, @Nullable  T> generateFieldSetter(@NotNull Class<?> source, @NotNull String field_name) {
+        return generateFieldSetter(source, field_name, null);
     }
 
     /**
@@ -186,7 +189,7 @@ public class UnsafeUtilities {
      * @return A function that will handle getter of static field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> FunctionRET<@Nullable T> generateStaticGetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Function<NoSuchFieldException, T> onException) {
+    public static @NotNull <T> FunctionRET<@Nullable T> generateStaticFieldGetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Function<NoSuchFieldException, T> onException) {
         return () -> {
             try {
                 Field f = source.getDeclaredField(field_name);
@@ -209,8 +212,8 @@ public class UnsafeUtilities {
      * @return A function that will handle getter of static field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> FunctionRET<@Nullable T> generateStaticGetter(@NotNull Class<?> source, @NotNull String field_name) {
-        return generateStaticGetter(source, field_name, null);
+    public static @NotNull <T> FunctionRET<@Nullable T> generateStaticFieldGetter(@NotNull Class<?> source, @NotNull String field_name) {
+        return generateStaticFieldGetter(source, field_name, null);
     }
 
     /**
@@ -222,7 +225,7 @@ public class UnsafeUtilities {
      * @return A function that will handle setter of static field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> Consumer<@Nullable T> generateStaticSetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Consumer<NoSuchFieldException> onException) {
+    public static @NotNull <T> Consumer<@Nullable T> generateStaticFieldSetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Consumer<NoSuchFieldException> onException) {
         return t -> {
             try {
                 Field f = source.getDeclaredField(field_name);
@@ -242,7 +245,7 @@ public class UnsafeUtilities {
      * @return A function that will handle setter of static field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> Consumer<@Nullable T> generateStaticSetter(@NotNull Class<?> source, @NotNull String field_name) {
-        return generateStaticSetter(source, field_name, null);
+    public static @NotNull <T> Consumer<@Nullable T> generateStaticFieldSetter(@NotNull Class<?> source, @NotNull String field_name) {
+        return generateStaticFieldSetter(source, field_name, null);
     }
 }
