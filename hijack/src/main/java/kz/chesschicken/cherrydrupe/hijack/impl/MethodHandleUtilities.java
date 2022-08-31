@@ -17,8 +17,8 @@
  */
 package kz.chesschicken.cherrydrupe.hijack.impl;
 
-import kz.chesschicken.cherrydrupe.function.FunctionRET;
-import kz.chesschicken.cherrydrupe.function.FunctionARRSETRET;
+import kz.chesschicken.cherrydrupe.function.NulliFunction;
+import kz.chesschicken.cherrydrupe.function.ObjectsFunction;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -167,7 +167,7 @@ public class MethodHandleUtilities {
      * @return A function that will handle getter of the static field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static <T> @NotNull FunctionRET<@Nullable T> generateStaticFieldGetter(
+    public static <T> @NotNull NulliFunction<@Nullable T> generateStaticFieldGetter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type,
@@ -195,7 +195,7 @@ public class MethodHandleUtilities {
      * @return A function that will handle getter of the static field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static <T> @NotNull FunctionRET<@Nullable T> generateStaticFieldGetter(
+    public static <T> @NotNull NulliFunction<@Nullable T> generateStaticFieldGetter(
             @NotNull Class<?> source,
             @NotNull String field_name,
             @NotNull Class<T> field_type
@@ -257,7 +257,7 @@ public class MethodHandleUtilities {
      * @return A function that will handle accessor of the method.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static <T> @NotNull FunctionARRSETRET<@Nullable T> generateMethod(
+    public static <T> @NotNull ObjectsFunction<@Nullable T> generateMethod(
             @NotNull Class<?> source,
             @NotNull String method_name,
             @NotNull Class<T> method_type,
@@ -287,7 +287,7 @@ public class MethodHandleUtilities {
      * @return A function that will handle accessor of the method.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static <T> @NotNull FunctionARRSETRET<@Nullable T> generateMethod(
+    public static <T> @NotNull ObjectsFunction<@Nullable T> generateMethod(
             @NotNull Class<?> source,
             @NotNull String method_name,
             @NotNull Class<T> method_type,
@@ -307,7 +307,7 @@ public class MethodHandleUtilities {
      * @return A function that will handle accessor of the static method.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static <T> @NotNull FunctionARRSETRET<@Nullable T> generateStaticMethod(
+    public static <T> @NotNull ObjectsFunction<@Nullable T> generateStaticMethod(
             @NotNull Class<?> source,
             @NotNull String method_name,
             @NotNull Class<T> method_type,
@@ -338,7 +338,7 @@ public class MethodHandleUtilities {
      * @return A function that will handle accessor of the static method.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static <T> @NotNull FunctionARRSETRET<@Nullable T> generateStaticMethod(
+    public static <T> @NotNull ObjectsFunction<@Nullable T> generateStaticMethod(
             @NotNull Class<?> source,
             @NotNull String method_name,
             @NotNull Class<T> method_type,
@@ -356,7 +356,7 @@ public class MethodHandleUtilities {
      * @return A function that will handle class generation via constructor.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static <T> @NotNull FunctionARRSETRET<T> generateConstructor(
+    public static <T> @NotNull ObjectsFunction<T> generateConstructor(
             @NotNull Class<T> source,
             Class<?>[] params,
             @Nullable Function<Throwable, T> onException
@@ -382,7 +382,7 @@ public class MethodHandleUtilities {
      * @return A function that will handle class generation via constructor.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static <T> @NotNull FunctionARRSETRET<T> generateConstructor(
+    public static <T> @NotNull ObjectsFunction<T> generateConstructor(
             @NotNull Class<T> source,
             Class<?>[] params
     ) {

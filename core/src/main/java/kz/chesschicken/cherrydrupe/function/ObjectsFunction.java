@@ -18,10 +18,11 @@
 package kz.chesschicken.cherrydrupe.function;
 
 /**
- * An interface function with no arguments, but with return.
+ * An interface function with arguments as Object array.
  * @param <O> return type.
  * @author ChessChicken-KZ
  */
-public interface FunctionRET<O> {
-    O apply();
+@FunctionalInterface
+public interface ObjectsFunction<O> {
+    O apply(Object... o);
 }

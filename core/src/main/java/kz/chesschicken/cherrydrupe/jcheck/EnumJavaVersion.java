@@ -17,7 +17,7 @@
  */
 package kz.chesschicken.cherrydrupe.jcheck;
 
-import kz.chesschicken.cherrydrupe.function.FunctionRET;
+import kz.chesschicken.cherrydrupe.function.NulliFunction;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -25,14 +25,10 @@ import org.jetbrains.annotations.NotNull;
  * @author ChessChicken-KZ
  */
 public enum EnumJavaVersion {
-    /**
-     * Isn't supported by the library.
-     */
+    /** Isn't supported by the library. */
     @Deprecated
     JAVA_6("Java 1.6", (byte) 6),
-    /**
-     * Isn't supported by the library.
-     */
+    /** Isn't supported by the library. */
     @Deprecated
     JAVA_7("Java 1.7", (byte) 7),
     JAVA_8("Java 1.8", (byte) 8),
@@ -56,7 +52,7 @@ public enum EnumJavaVersion {
         CODE = b;
     }
 
-    public static final @NotNull EnumJavaVersion CURRENT_JAVA_VERSION = ((FunctionRET<EnumJavaVersion>) () -> {
+    public static final @NotNull EnumJavaVersion CURRENT_JAVA_VERSION = ((NulliFunction<EnumJavaVersion>) () -> {
         String a = System.getProperty("java.version");
         a = a.startsWith("1.") ? a.substring(2, 3) : ((a.contains(".")) ? a.substring(0, a.indexOf(".")) : a);
         try {

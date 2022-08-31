@@ -17,7 +17,7 @@
  */
 package kz.chesschicken.cherrydrupe.hijack.impl;
 
-import kz.chesschicken.cherrydrupe.function.FunctionRET;
+import kz.chesschicken.cherrydrupe.function.NulliFunction;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -206,7 +206,7 @@ public class UnsafeUtilities {
      * @return A function that will handle getter of static field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> FunctionRET<@Nullable T> generateStaticFieldGetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Function<NoSuchFieldException, T> onException) {
+    public static @NotNull <T> NulliFunction<@Nullable T> generateStaticFieldGetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Function<NoSuchFieldException, T> onException) {
         return () -> {
             try {
                 Field f = source.getDeclaredField(field_name);
@@ -229,7 +229,7 @@ public class UnsafeUtilities {
      * @return A function that will handle getter of static field.
      */
     @ApiStatus.AvailableSince("0.2")
-    public static @NotNull <T> FunctionRET<@Nullable T> generateStaticFieldGetter(@NotNull Class<?> source, @NotNull String field_name) {
+    public static @NotNull <T> NulliFunction<@Nullable T> generateStaticFieldGetter(@NotNull Class<?> source, @NotNull String field_name) {
         return generateStaticFieldGetter(source, field_name, null);
     }
 

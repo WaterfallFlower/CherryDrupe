@@ -18,11 +18,14 @@
 package kz.chesschicken.cherrydrupe.function;
 
 /**
- * An interface function with arguments as Object array.
- * @param <O> return type.
+ * An interface functions with 3 arguments and 1 return value.
+ * @param <A> First argument's type.
+ * @param <B> Second argument's type.
+ * @param <C> Third argument's type.
+ * @param <R> Return argument's type.
  * @author ChessChicken-KZ
  */
-@SuppressWarnings("UnusedReturnValue")
-public interface FunctionARRSETRET<O> {
-    O apply(Object... o);
+@FunctionalInterface
+public interface TerFunction<A, B, C, R> {
+    R apply(A a, B b, C c);
 }
