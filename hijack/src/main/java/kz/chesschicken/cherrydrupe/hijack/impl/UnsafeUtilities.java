@@ -22,7 +22,7 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getUnsafe;
  *
  * <p>
  *     After a heavy refactor of the library methods became static and now you can access without creating "dynamic context".
- *     However, some methods still use some old deprecated parts of the library, which will be eventually removed.
+ *     Methods which generate functions are provided with and without safe "exception process" function.
  * </p>
  *
  * <p>
@@ -39,9 +39,9 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getUnsafe;
  *     List of methods generators:
  *     <ul>
  *         <li>Getting field: {@link UnsafeUtilities#generateGetter(Class, String)}.</li>
- *         <li>Getting static field: {@link UnsafeUtilities#generateStaticGetter(Class, String, Class)}.</li>
+ *         <li>Getting static field: {@link UnsafeUtilities#generateStaticGetter(Class, String)}.</li>
  *         <li>Setting field: {@link UnsafeUtilities#generateSetter(Class, String)}.</li>
- *         <li>Setting static field: {@link UnsafeUtilities#generateStaticSetter(Class, String, Class)}.</li>
+ *         <li>Setting static field: {@link UnsafeUtilities#generateStaticSetter(Class, String)}.</li>
  *     </ul>
  * </p>
  *
@@ -106,6 +106,28 @@ public class UnsafeUtilities {
     }
 
     /**
+     * A method that generates a function of field's getter. The method provides safe "exception" function.
+     * @param source Class where the field is located.
+     * @param field_name Field's name.
+     * @param onException A function that will be executed when if <tt>NoSuchFieldException</tt> is caught.
+     * @param <T> The getter value's type.
+     * @return A function that will handle getter of field.
+     */
+    public static @NotNull <T> Function<@NotNull Object, @Nullable T> generateGetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Function<NoSuchFieldException, T> onException) {
+        return o -> {
+            try {
+                //noinspection unchecked
+                return (T) getUnsafe().getObject(o, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)));
+            } catch (NoSuchFieldException e) {
+                if(onException != null)
+                    return onException.apply(e);
+                e.printStackTrace();
+                return null;
+            }
+        };
+    }
+
+    /**
      * A method that generates a function of field's getter.
      * @param source Class where the field is located.
      * @param field_name Field's name.
@@ -113,13 +135,24 @@ public class UnsafeUtilities {
      * @return A function that will handle getter of field.
      */
     public static @NotNull <T> Function<@NotNull Object, @Nullable T> generateGetter(@NotNull Class<?> source, @NotNull String field_name) {
-        return o -> {
+        return generateGetter(source, field_name, null);
+    }
+
+    /**
+     * A method that generates a function of field's setter. The method provides safe "exception" function.
+     * @param source Class where the field is located.
+     * @param field_name Field's name.
+     * @param onException A function that will be executed when if <tt>NoSuchFieldException</tt> is caught.
+     * @param <T> The setter value's type.
+     * @return A function that will handle setter of field.
+     */
+    public static @NotNull <T> BiConsumer<@NotNull Object, @Nullable  T> generateSetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Consumer<NoSuchFieldException> onException) {
+        return (o, t) -> {
             try {
-                //noinspection unchecked
-                return (T) getUnsafe().getObject(o, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)));
+                getUnsafe().putObject(o, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)), t);
             } catch (NoSuchFieldException e) {
-                GlobalExceptionProcessor.processException(e);
-                return GlobalExceptionProcessor.safeNullValue();
+                if(onException != null) onException.accept(e);
+                else e.printStackTrace();
             }
         };
     }
@@ -132,11 +165,28 @@ public class UnsafeUtilities {
      * @return A function that will handle setter of field.
      */
     public static @NotNull <T> BiConsumer<@NotNull Object, @Nullable  T> generateSetter(@NotNull Class<?> source, @NotNull String field_name) {
-        return (o, t) -> {
+        return generateSetter(source, field_name, null);
+    }
+
+    /**
+     * A method that generates a function of static field's getter. The method provides safe "exception" function.
+     * @param source Class where the static field is located.
+     * @param field_name Static field's name.
+     * @param onException A function that will be executed when if <tt>NoSuchFieldException</tt> is caught.
+     * @param <T> The return value's type.
+     * @return A function that will handle getter of static field.
+     */
+    public static @NotNull <T> FunctionRET<@Nullable T> generateStaticGetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Function<NoSuchFieldException, T> onException) {
+        return () -> {
             try {
-                getUnsafe().putObject(o, getUnsafe().objectFieldOffset(source.getDeclaredField(field_name)), t);
+                Field f = source.getDeclaredField(field_name);
+                //noinspection unchecked
+                return (T) getUnsafe().getObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f));
             } catch (NoSuchFieldException e) {
-                GlobalExceptionProcessor.processException(e);
+                if(onException != null)
+                    return onException.apply(e);
+                e.printStackTrace();
+                return null;
             }
         };
     }
@@ -149,14 +199,25 @@ public class UnsafeUtilities {
      * @return A function that will handle getter of static field.
      */
     public static @NotNull <T> FunctionRET<@Nullable T> generateStaticGetter(@NotNull Class<?> source, @NotNull String field_name) {
-        return () -> {
+        return generateStaticGetter(source, field_name, null);
+    }
+
+    /**
+     * A method that generates a function of static field's setter. The method provides safe "exception" function.
+     * @param source Class where the static field is located.
+     * @param field_name Static field's name.
+     * @param onException A function that will be executed when if <tt>NoSuchFieldException</tt> is caught.
+     * @param <T> The setter value's type.
+     * @return A function that will handle setter of static field.
+     */
+    public static @NotNull <T> Consumer<@Nullable T> generateStaticSetter(@NotNull Class<?> source, @NotNull String field_name, @Nullable Consumer<NoSuchFieldException> onException) {
+        return t -> {
             try {
                 Field f = source.getDeclaredField(field_name);
-                //noinspection unchecked
-                return (T) getUnsafe().getObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f));
+                getUnsafe().putObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f), t);
             } catch (NoSuchFieldException e) {
-                GlobalExceptionProcessor.processException(e);
-                return GlobalExceptionProcessor.safeNullValue();
+                if(onException != null) onException.accept(e);
+                else e.printStackTrace();
             }
         };
     }
@@ -169,13 +230,6 @@ public class UnsafeUtilities {
      * @return A function that will handle setter of static field.
      */
     public static @NotNull <T> Consumer<@Nullable T> generateStaticSetter(@NotNull Class<?> source, @NotNull String field_name) {
-        return t -> {
-            try {
-                Field f = source.getDeclaredField(field_name);
-                getUnsafe().putObject(getUnsafe().staticFieldBase(f), getUnsafe().staticFieldOffset(f), t);
-            } catch (NoSuchFieldException e) {
-                GlobalExceptionProcessor.processException(e);
-            }
-        };
+        return generateStaticSetter(source, field_name, null);
     }
 }
