@@ -17,33 +17,9 @@
  */
 package kz.chesschicken.cherrydrupe;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Consumer;
-
 /**
- * Another cursed way to one line a code of initialization and load of an instance.
- * @author ChessChicken-KZ
+ * @deprecated Removed.
  */
+@Deprecated
 public class InitAndApply {
-
-    /**
-     * The main method of this class.<br>
-     * An example of usage:<br>
-     * <pre>{@code
-     * Map<Integer, String> aMap = InitAndApply.apply(new HashMap<>(), instance -> {
-     *      instance.put(0, "Sky");
-     *      instance.put(5, "Cloud");
-     * });
-     * }</pre>
-     *
-     * @param instance An instance to be applied, should not be null.
-     * @param acceptor {@link Consumer} A consumer that applies some specific code to the instance.
-     * @param <A> The instance's type.
-     * @return The instance with executed consumer.
-     */
-    public static<A> @NotNull A get(@NotNull A instance, @NotNull Consumer<A> acceptor) {
-        acceptor.accept(instance);
-        return instance;
-    }
 }
