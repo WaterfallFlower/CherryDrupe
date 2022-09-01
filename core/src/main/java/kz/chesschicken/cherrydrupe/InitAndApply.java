@@ -19,19 +19,13 @@ package kz.chesschicken.cherrydrupe;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Consumer;
+
 /**
  * Another cursed way to one line a code of initialization and load of an instance.
  * @author ChessChicken-KZ
  */
 public class InitAndApply {
-
-    /**
-     * Just a lighter version of {@link java.util.function.Consumer}.
-     * @param <A> The instance's type.
-     */
-    public interface Acceptor<A> {
-        void apply(@NotNull A instance);
-    }
 
     /**
      * The main method of this class.<br>
@@ -44,12 +38,12 @@ public class InitAndApply {
      * }</pre>
      *
      * @param instance An instance to be applied, should not be null.
-     * @param acceptor {@link Acceptor} A consumer that applies some specific code to the instance.
+     * @param acceptor {@link Consumer} A consumer that applies some specific code to the instance.
      * @param <A> The instance's type.
      * @return The instance with executed consumer.
      */
-    public static<A> @NotNull A get(@NotNull A instance, @NotNull InitAndApply.Acceptor<A> acceptor) {
-        acceptor.apply(instance);
+    public static<A> @NotNull A get(@NotNull A instance, @NotNull Consumer<A> acceptor) {
+        acceptor.accept(instance);
         return instance;
     }
 }

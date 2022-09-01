@@ -29,7 +29,7 @@ import java.lang.reflect.Field;
  *     This utilities class provides two public methods:
  *     <ul>
  *         <li>{@link Unsafe} instance {@link InstanceProvider#getUnsafe()}, with full permission.</li>
- *         <li>{@link MethodHandles.Lookup} instance {@link InstanceProvider#getLookup()} with full trusted role.</li>
+ *         <li>{@link MethodHandles.Lookup} instance {@link InstanceProvider#getLookup()} with full trusted permission.</li>
  *     </ul>
  * </p>
  * @author ChessChicken-KZ
