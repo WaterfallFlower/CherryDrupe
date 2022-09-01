@@ -22,16 +22,23 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
+/**
+ * A range of quite strange tools and methods that may be able to help with the usafe of functional interfaces.
+ * @author ChessChicken-KZ
+ * @since 0.2
+ */
 public class Functional {
     /**
      * A cursed way to one line a code of initialization and load of an instance.
-     * An example of usage:<br>
-     * <pre>{@code
-     * Map<Integer, String> aMap = InitAndApply.apply(new HashMap<>(), instance -> {
+     * <p>
+     *     An example of usage:
+     *     <pre>{@code
+     *     Map<Integer, String> aMap = InitAndApply.apply(new HashMap<>(), instance -> {
      *      instance.put(0, "Sky");
      *      instance.put(5, "Cloud");
-     * });
-     * }</pre>
+     *     });
+     *     }</pre>
+     * </p>
      *
      * @param instance An instance to be applied, should not be null.
      * @param acceptor {@link Consumer} A consumer that applies some specific code to the instance.

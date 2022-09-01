@@ -47,7 +47,7 @@ public class TransformTools {
         for(T t : array) if(predicate.test(t)) a.add(t);
         return a;
     }
-    
+
     /**
      * Simply takes an array and generate data in it by following given transforming function.
      * @param array An array with fixed size.
