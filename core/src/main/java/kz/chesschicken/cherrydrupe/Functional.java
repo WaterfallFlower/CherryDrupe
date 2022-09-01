@@ -18,6 +18,7 @@
 package kz.chesschicken.cherrydrupe;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -37,7 +38,7 @@ public class Functional {
      * @param <A> The instance's type.
      * @return The instance with executed consumer.
      */
-    public static<A> @NotNull A get(@NotNull A instance, @NotNull Consumer<A> acceptor) {
+    public static<A> @NotNull A applyInit(@NotNull A instance, @NotNull Consumer<A> acceptor) {
         acceptor.accept(instance);
         return instance;
     }
