@@ -17,6 +17,7 @@
  */
 package kz.chesschicken.cherrydrupe;
 
+import kz.chesschicken.cherrydrupe.function.BiIntFunction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,8 +25,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 /**
@@ -42,7 +43,10 @@ public class TransformTools {
      * @param <T> The array's objects type.
      * @return The list with converted and transformed data.
      */
-    public static <T> @NotNull List<T> transformArray(@Nullable T @NotNull [] array, @NotNull Predicate<T> predicate) {
+    public static <T> @NotNull List<T> transformArray(
+            @Nullable T @NotNull [] array,
+            @NotNull Predicate<T> predicate
+    ) {
         List<T> a = new ArrayList<>();
         for(T t : array) if(predicate.test(t)) a.add(t);
         return a;
@@ -57,7 +61,7 @@ public class TransformTools {
      */
     public static <T> @Nullable T @NotNull [] fillArray(
             @Nullable T @NotNull [] array,
-            @NotNull Function<@NotNull Integer, @Nullable T> transformer
+            @NotNull IntFunction<@Nullable T> transformer
     ) {
         for (int i = 0; i < array.length; i++)
             array[i] = transformer.apply(i);
@@ -74,7 +78,7 @@ public class TransformTools {
      */
     public static <T> @Nullable T @NotNull [] fillArray(
             Class<T> clazz, int size,
-            @NotNull Function<@NotNull Integer, @Nullable T> transformer
+            @NotNull IntFunction<@Nullable T> transformer
     ) {
         @SuppressWarnings("unchecked")
         T[] array = (T[]) Array.newInstance(clazz, size);
@@ -118,7 +122,7 @@ public class TransformTools {
     public static <T, K> @Nullable T @NotNull [] transformFromList(
             @Nullable T @NotNull [] array,
             @NotNull List<K> list,
-            @NotNull BiFunction<K, Integer, T> transformer
+            @NotNull BiIntFunction<K, T> transformer
     ) {
         for(int q = 0; q < list.size(); q++)
             array[q] = transformer.apply(list.get(q), q);

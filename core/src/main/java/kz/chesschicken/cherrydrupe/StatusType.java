@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
  */
 @ApiStatus.Experimental
 public class StatusType<T> {
+
     public enum Status {
         SUCCESS,
         FAIL,

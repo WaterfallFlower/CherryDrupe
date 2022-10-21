@@ -18,9 +18,7 @@
 package kz.chesschicken.cherrydrupe;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Array;
 import java.util.function.Consumer;
 
 /**
@@ -34,7 +32,7 @@ public class Functional {
      * <p>
      *     An example of usage:
      *     <pre>{@code
-     *     Map<Integer, String> aMap = InitAndApply.apply(new HashMap<>(), instance -> {
+     *     Map<Integer, String> aMap = Functional.applyInit(new HashMap<>(), instance -> {
      *      instance.put(0, "Sky");
      *      instance.put(5, "Cloud");
      *     });
