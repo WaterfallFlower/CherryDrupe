@@ -17,6 +17,12 @@
  */
 package kz.chesschicken.cherrydrupe.function;
 
+/**
+ * A functional interface which applies an int and argument and returns another value.
+ * @author ChessChicken-KZ
+ * @since 0.2
+ */
+@FunctionalInterface
 public interface BiIntFunction<A, R> {
     R apply(A a, int i);
 }

@@ -56,20 +56,22 @@ public enum EnumJavaVersion {
         version = b;
     }
 
-    public static final @NotNull EnumJavaVersion CURRENT_JAVA_VERSION = ((NulliFunction<EnumJavaVersion>) () -> {
-        String a = System.getProperty("java.version");
-        a = a.startsWith("1.") ? a.substring(2, 3) : ((a.contains(".")) ? a.substring(0, a.indexOf(".")) : a);
-        try {
-            return EnumJavaVersion.valueOf("JAVA_" + a);
-        } catch (IllegalArgumentException e) {
-            return Byte.parseByte(a) > EnumJavaVersion.JAVA_18.version ? EnumJavaVersion.NEWER_VERSION : EnumJavaVersion.UNKNOWN;
-        }
-    }).apply();
+    public static EnumJavaVersion CURRENT_JAVA_VERSION;
 
-    @SuppressWarnings("UseCompareMethod")
-    public static byte compareJavaVersions(@NotNull EnumJavaVersion a, @NotNull EnumJavaVersion b) {
-        if(a.version < b.version) return -1;
-        if(a.version > b.version) return 1;
-        return 0;
+    public static @NotNull EnumJavaVersion getCurrentJavaVersion() {
+        if(CURRENT_JAVA_VERSION == null) {
+            String a = System.getProperty("java.version");
+            a = a.startsWith("1.") ? a.substring(2, 3) : ((a.contains(".")) ? a.substring(0, a.indexOf(".")) : a);
+            try {
+                return EnumJavaVersion.valueOf("JAVA_" + a);
+            } catch (IllegalArgumentException e) {
+                return Byte.parseByte(a) > EnumJavaVersion.JAVA_18.version ? EnumJavaVersion.NEWER_VERSION : EnumJavaVersion.UNKNOWN;
+            }
+        }
+        return CURRENT_JAVA_VERSION;
+    }
+
+    public static int compareJavaVersions(@NotNull EnumJavaVersion a, @NotNull EnumJavaVersion b) {
+        return Byte.compare(a.version, b.version);
     }
 }

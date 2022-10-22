@@ -35,8 +35,8 @@ public class StatusType<T> {
         NULL
     }
 
-    @Nullable T value;
-    @NotNull Status status;
+    final @Nullable T value;
+    final @NotNull Status status;
 
     public @Nullable T getValue() {
         return this.value;
@@ -44,6 +44,10 @@ public class StatusType<T> {
 
     public @NotNull Status getStatus() {
         return this.status;
+    }
+
+    public boolean isSuccess() {
+        return this.status == Status.SUCCESS;
     }
 
     StatusType(@Nullable T t, @NotNull Status s) {
