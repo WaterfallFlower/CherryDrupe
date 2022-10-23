@@ -18,6 +18,7 @@
 package kz.chesschicken.cherrydrupe.hijack;
 
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -26,7 +27,7 @@ public class UnsafeClass {
 
     @SuppressWarnings("unchecked")
     @ApiStatus.Experimental
-    public static <T> @Nullable T initClass(Class<T> target, Consumer<T> header) {
+    public static <T> @Nullable T initClass(@NotNull Class<T> target, @NotNull Consumer<T> header) {
         try {
             T a = (T) InstanceProvider.UNSAFE_INSTANCE.allocateInstance(target);
             header.accept(a);

@@ -35,11 +35,11 @@ public interface TryReturn<R, T extends Throwable> {
 
     default void _finally() {}
 
+    @SuppressWarnings("unchecked")
     @Nullable default R apply() {
         try {
             return _try();
         } catch (Throwable t) {
-            //noinspection unchecked
             return _catch((T) t);
         } finally {
             _finally();

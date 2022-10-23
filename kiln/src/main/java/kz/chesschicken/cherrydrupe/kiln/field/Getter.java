@@ -15,32 +15,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package kz.chesschicken.cherrydrupe.tryint;
+package kz.chesschicken.cherrydrupe.kiln.field;
 
-import org.jetbrains.annotations.NotNull;
+public interface Getter<R> {
 
-/**
- * An interface implementation of the "try" statement.
- * @param <T> An exception's type.
- * @author ChessChicken-KZ
- */
-public interface Try<T extends Throwable> {
+    R get(Object o);
 
-    void _try() throws T;
-
-    void _catch(@NotNull T t);
-
-    default void _finally() {}
-
-    @SuppressWarnings("unchecked")
-    default void apply() {
-        try {
-            _try();
-        } catch (Throwable t) {
-            _catch((T) t);
-        } finally {
-            _finally();
-        }
-    }
+    R get();
 
 }

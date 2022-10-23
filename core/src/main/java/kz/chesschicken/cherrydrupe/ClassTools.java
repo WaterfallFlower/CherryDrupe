@@ -17,9 +17,11 @@
  */
 package kz.chesschicken.cherrydrupe;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ClassTools {
 
-    public static boolean classExists(String s) {
+    public static boolean classExists(@NotNull String s) {
         try {
             Class.forName(s.replaceAll("/", "."));
             return true;
@@ -28,7 +30,7 @@ public class ClassTools {
         }
     }
 
-    public static boolean classExists(ClassLoader loader, String s) {
+    public static boolean classExists(@NotNull ClassLoader loader, @NotNull String s) {
         try {
             loader.loadClass(s.replaceAll("/", "."));
             return true;

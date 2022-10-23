@@ -30,11 +30,39 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 /**
- * A set of useful tools for transforming various things into simple arrays.
+ * A set of useful tools for transforming various things into other things.
  * @author ChessChicken-KZ
  * @since 0.1
  */
 public class TransformTools {
+
+    public static short @NotNull [] intToShort(int @NotNull [] i) {
+        short[] s = new short[i.length];
+        for(int q = 0; q < s.length; q++)
+            s[q] = (short) i[q];
+        return s;
+    }
+
+    public static int @NotNull [] shortToInt(short @NotNull [] s) {
+        int[] a = new int[s.length];
+        for(int q = 0; q < s.length; q++)
+            a[q] = s[q];
+        return a;
+    }
+
+    public static byte @NotNull [] intToByte(int @NotNull [] i) {
+        byte[] b = new byte[i.length];
+        for(int q = 0; q < b.length; q++)
+            b[q] = (byte) i[q];
+        return b;
+    }
+
+    public static int @NotNull [] byteToInt(byte @NotNull [] b) {
+        int[] i = new int[b.length];
+        for(int q = 0; q < b.length; q++)
+            i[q] = b[q];
+        return i;
+    }
 
     /**
      * A transforming method that taken an array and returns {@link ArrayList} implementation.

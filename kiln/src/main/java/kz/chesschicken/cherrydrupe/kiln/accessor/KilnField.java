@@ -15,32 +15,21 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package kz.chesschicken.cherrydrupe.tryint;
+package kz.chesschicken.cherrydrupe.kiln.accessor;
 
-import org.jetbrains.annotations.NotNull;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-/**
- * An interface implementation of the "try" statement.
- * @param <T> An exception's type.
- * @author ChessChicken-KZ
- */
-public interface Try<T extends Throwable> {
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface KilnField {
 
-    void _try() throws T;
+    String name();
 
-    void _catch(@NotNull T t);
+    String deobfuscated();
 
-    default void _finally() {}
-
-    @SuppressWarnings("unchecked")
-    default void apply() {
-        try {
-            _try();
-        } catch (Throwable t) {
-            _catch((T) t);
-        } finally {
-            _finally();
-        }
-    }
+    boolean isStaticField() default false;
 
 }
