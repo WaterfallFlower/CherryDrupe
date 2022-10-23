@@ -17,10 +17,24 @@
  */
 package kz.chesschicken.cherrydrupe.kiln.field;
 
+/**
+ * Getter function, should be used for a field.
+ * @author ChessChicken-KZ
+ * @since 0.3
+ */
 public interface Getter<R> {
 
+    /**
+     * Tries to get the value from the field.
+     * @param o Instance of the class, where field is located.
+     * @return The field's value.
+     */
     R get(Object o);
 
+    /**
+     * Tries to get the value from the field. If the field to process is dynamic, will throw {@link RuntimeException}.
+     * @return The field's value.
+     */
     R get();
 
 }
