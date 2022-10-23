@@ -84,7 +84,7 @@ public class KilnProcessor {
         }
     }
 
-    private static <T> Setter<T> generateSetter(@NotNull Class<?> clazz, @NotNull KilnField field) {
+    private static <T> @NotNull Setter<T> generateSetter(@NotNull Class<?> clazz, @NotNull KilnField field) {
         if(isInvalidField(clazz, field))
             throw new RuntimeException("Cannot field field!");
 
@@ -119,7 +119,7 @@ public class KilnProcessor {
         };
     }
 
-    private static <T> Getter<T> generateGetter(@NotNull Class<?> clazz, @NotNull KilnField field) {
+    private static <T> @NotNull Getter<T> generateGetter(@NotNull Class<?> clazz, @NotNull KilnField field) {
         if(isInvalidField(clazz, field))
             throw new RuntimeException("Cannot field field!");
 
