@@ -19,15 +19,22 @@ package kz.chesschicken.cherrydrupe.kiln.accessor;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * The annotation to define a class to be manipulated inside a specific class, which had got tagged this annotation.
+ * @author ChessChicken-KZ
+ * @since 0.3
+ */
+@Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Kiln {
 
+    /**
+     * A class that needs to be manipulated with Kiln.
+     * @return A class value.
+     */
     @NotNull Class<?> value();
 
 }

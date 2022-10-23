@@ -17,19 +17,36 @@
  */
 package kz.chesschicken.cherrydrupe.kiln.accessor;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * An annotation to define a field that should accept hijack functions.
+ * @see kz.chesschicken.cherrydrupe.kiln.field.Getter Hijack function for field getter.
+ * @see kz.chesschicken.cherrydrupe.kiln.field.Setter Hijack function for field setter.
+ * @author ChessChicken-KZ
+ * @since 0.3
+ */
+@Documented
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface KilnField {
 
+    /**
+     * A default name of the field.
+     * @return Field name.
+     */
     String name();
 
-    String deobfuscated();
+    /**
+     * Deobfuscated name of the field (can be "" if there isn't any obfuscation).
+     * @return Deobfuscated field name.
+     */
+    String deobfuscated() default "";
 
+    /**
+     * Returns true if the given field is static.
+     * @return Static field boolean.
+     */
     boolean isStaticField() default false;
 
 }
