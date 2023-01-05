@@ -7,7 +7,7 @@
     <parent>
         <artifactId>CherryDrupe</artifactId>
         <groupId>kz.chesschicken</groupId>
-        <version>0.2</version>
+        <version>0.3</version>
     </parent>
 
     <artifactId>cherrydrupe-kiln</artifactId>

@@ -6,10 +6,10 @@ A set of tools that cause only pain.
 Supports Java 8+.
 ## Current features:
 
-### [InitAndApply](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/src/main/java/kz/chesschicken/cherrydrupe/InitAndApply.java)
-An interface that allows us to initialise and pre-setup an object.
+### [Functional](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/src/main/java/kz/chesschicken/cherrydrupe/Functional.java)
+Generate a code that allows us to initialise and pre-setup an object.
 ```java
-Map<String, String> aReadyMap = InitAndApply.apply(new HashMap<>(), instance -> {
+Map<String, String> aReadyMap = Functional.applyInit(new HashMap<>(), instance -> {
     instance.put("Land", "Grass");
     instance.put("Sky", "Cloud");
 });
