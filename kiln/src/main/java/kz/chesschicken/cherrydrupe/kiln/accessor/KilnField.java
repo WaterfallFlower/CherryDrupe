@@ -17,6 +17,8 @@
  */
 package kz.chesschicken.cherrydrupe.kiln.accessor;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.lang.annotation.*;
 
 /**
@@ -42,6 +44,12 @@ public @interface KilnField {
      * @return Deobfuscated field name.
      */
     String deobfuscated() default "";
+
+    /**
+     * Returns the target, where the hijacking needs to be performed.
+     * @return Target class.
+     */
+    Class<?> target();
 
     /**
      * Returns true if the given field is static.

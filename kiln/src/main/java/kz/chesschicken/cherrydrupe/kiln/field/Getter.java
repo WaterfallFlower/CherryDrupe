@@ -17,6 +17,8 @@
  */
 package kz.chesschicken.cherrydrupe.kiln.field;
 
+import kz.chesschicken.cherrydrupe.kiln.KilnHijackException;
+
 /**
  * Getter function, should be used for a field.
  * @author ChessChicken-KZ
@@ -32,7 +34,7 @@ public interface Getter<R> {
     R get(Object o);
 
     /**
-     * Tries to get the value from the field. If the field to process is dynamic, will throw {@link RuntimeException}.
+     * Tries to get the value from the field. If the field to process is dynamic, will throw {@link KilnHijackException}.
      * @return The field's value.
      */
     R get();

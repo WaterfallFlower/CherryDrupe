@@ -49,25 +49,23 @@ public class KilnProcessor {
 
     public static void process(@NotNull Class<?> c, @Nullable Object t, boolean processStatic, boolean processDynamic) throws NoSuchFieldException {
         if(c.isAnnotationPresent(Kiln.class)) {
-            Class<?> clazzToProcess = c.getAnnotation(Kiln.class).value();
-
             for(Field field : c.getDeclaredFields()) {
                 if(!field.isAnnotationPresent(KilnField.class))
                     continue;
 
                 if(field.getType().isAssignableFrom(Setter.class)) {
                     if(processStatic && Modifier.isStatic(field.getModifiers())) {
-                        UnsafeUtilities.setStaticField(c, field.getName(), generateSetter(clazzToProcess, field.getAnnotation(KilnField.class)));
+                        UnsafeUtilities.setStaticField(c, field.getName(), generateSetter(field.getAnnotation(KilnField.class)));
                     }else if(processDynamic) {
-                        UnsafeUtilities.setField(c, field.getName(), generateSetter(clazzToProcess, field.getAnnotation(KilnField.class)), t);
+                        UnsafeUtilities.setField(c, field.getName(), generateSetter(field.getAnnotation(KilnField.class)), t);
                     }
                 }
 
                 if(field.getType().isAssignableFrom(Getter.class)) {
                     if(processStatic && Modifier.isStatic(field.getModifiers())) {
-                        UnsafeUtilities.setStaticField(c, field.getName(), generateGetter(clazzToProcess, field.getAnnotation(KilnField.class)));
+                        UnsafeUtilities.setStaticField(c, field.getName(), generateGetter(field.getAnnotation(KilnField.class)));
                     }else if (processDynamic) {
-                        UnsafeUtilities.setField(c, field.getName(), generateGetter(clazzToProcess, field.getAnnotation(KilnField.class)), t);
+                        UnsafeUtilities.setField(c, field.getName(), generateGetter(field.getAnnotation(KilnField.class)), t);
                     }
                 }
             }
@@ -77,16 +75,15 @@ public class KilnProcessor {
     @SuppressWarnings("ConstantConditions")
     private static boolean isInvalidField(@NotNull Class<?> clazz, @NotNull KilnField field) {
         try {
-            Field f = clazz.getDeclaredField(field.name());
-            return f == null; //Just for more "security".
+            return clazz.getDeclaredField(field.name()) == null; //Just for more "security".
         } catch (NoSuchFieldException e) {
             return true;
         }
     }
 
-    private static <T> @NotNull Setter<T> generateSetter(@NotNull Class<?> clazz, @NotNull KilnField field) {
-        if(isInvalidField(clazz, field))
-            throw new RuntimeException("Cannot field field!");
+    private static <T> @NotNull Setter<T> generateSetter(@NotNull KilnField field) {
+        if(isInvalidField(field.target(), field))
+            throw new KilnHijackException("Cannot find field!");
 
         return field.isStaticField() ? new Setter<T>() {
             @Override
@@ -97,31 +94,31 @@ public class KilnProcessor {
             @Override
             public void set(T t) {
                 try {
-                    UnsafeUtilities.setStaticField(clazz, field.name(), t);
+                    UnsafeUtilities.setStaticField(field.target(), field.name(), t);
                 }catch (NoSuchFieldException e) {
-                    throw new RuntimeException(e);
+                    throw new KilnHijackException("Tried to set provided field, but it does not exist!", e);
                 }
             }
         } : new Setter<T>() {
             @Override
             public void set(Object o, T t) {
                 try {
-                    UnsafeUtilities.setField(clazz, field.name(), o, t);
+                    UnsafeUtilities.setField(field.target(), field.name(), o, t);
                 }catch (NoSuchFieldException e) {
-                    throw new RuntimeException(e);
+                    throw new KilnHijackException("Tried to set provided field, but it does not exist!", e);
                 }
             }
 
             @Override
             public void set(T t) {
-                throw new RuntimeException("Accessing as static while the context field is dynamic!");
+                throw new KilnHijackException("Accessing as static while the context field is dynamic!");
             }
         };
     }
 
-    private static <T> @NotNull Getter<T> generateGetter(@NotNull Class<?> clazz, @NotNull KilnField field) {
-        if(isInvalidField(clazz, field))
-            throw new RuntimeException("Cannot field field!");
+    private static <T> @NotNull Getter<T> generateGetter(@NotNull KilnField field) {
+        if(isInvalidField(field.target(), field))
+            throw new KilnHijackException("Cannot find field!");
 
         return field.isStaticField() ? new Getter<T>() {
             @Override
@@ -132,24 +129,24 @@ public class KilnProcessor {
             @Override
             public T get() {
                 try {
-                    return UnsafeUtilities.getStaticField(clazz, field.name());
+                    return UnsafeUtilities.getStaticField(field.target(), field.name());
                 } catch (NoSuchFieldException e) {
-                    throw new RuntimeException(e);
+                    throw new KilnHijackException("Tried to get provided field, but it does not exist!", e);
                 }
             }
         } : new Getter<T>() {
             @Override
             public T get(Object o) {
                 try {
-                    return UnsafeUtilities.getField(clazz, field.name(), o);
+                    return UnsafeUtilities.getField(field.target(), field.name(), o);
                 } catch (NoSuchFieldException e) {
-                    throw new RuntimeException(e);
+                    throw new KilnHijackException("Tried to get provided field, but it does not exist!", e);
                 }
             }
 
             @Override
             public T get() {
-                throw new RuntimeException("Accessing as static while the context field is dynamic!");
+                throw new KilnHijackException("Accessing as static while the context field is dynamic!");
             }
         };
     }

@@ -17,6 +17,8 @@
  */
 package kz.chesschicken.cherrydrupe.kiln.field;
 
+import kz.chesschicken.cherrydrupe.kiln.KilnHijackException;
+
 /**
  * Setter function, should be used as field.
  * @author ChessChicken-KZ
@@ -32,7 +34,7 @@ public interface Setter<S> {
     void set(Object o, S s);
 
     /**
-     * Tries to set the value from the field. If the field to process is dynamic, will throw {@link RuntimeException}.
+     * Tries to set the value from the field. If the field to process is dynamic, will throw {@link KilnHijackException}.
      * @param s New value for the field.
      */
     void set(S s);
