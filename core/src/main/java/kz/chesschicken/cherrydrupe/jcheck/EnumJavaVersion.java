@@ -17,7 +17,6 @@
  */
 package kz.chesschicken.cherrydrupe.jcheck;
 
-import kz.chesschicken.cherrydrupe.function.NulliFunction;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -43,16 +42,18 @@ public enum EnumJavaVersion {
     JAVA_16("Java 16", (byte) 16),
     JAVA_17("Java 17", (byte) 17),
     JAVA_18("Java 18", (byte) 18),
+    JAVA_19("Java 19", (byte) 19),
+    JAVA_20("Java 20", (byte) 20),
     /** Only being chosen by system if the Java Runtime version is newer that any available in enum list. */
     NEWER_VERSION("Unknown New Version", Byte.MAX_VALUE),
     /** Unknown Java version. */
     UNKNOWN("Unknown", Byte.MIN_VALUE);
 
-    public final String readable;
+    public final String simpleName;
     public final byte version;
 
     EnumJavaVersion(String a, byte b) {
-        readable = a;
+        simpleName = a;
         version = b;
     }
 

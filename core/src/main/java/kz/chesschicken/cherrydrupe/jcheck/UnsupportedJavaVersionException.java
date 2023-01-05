@@ -27,6 +27,6 @@ public class UnsupportedJavaVersionException extends RuntimeException {
     private static final long serialVersionUID = 4559356163768608667L;
 
     public UnsupportedJavaVersionException(@NotNull EnumJavaVersion current, @NotNull EnumJavaVersion required) {
-        super("Required Java version: " + required.readable + ", but got: " + current.readable);
+        super("Required Java version: " + required.simpleName + ", but got: " + current.simpleName);
     }
 }

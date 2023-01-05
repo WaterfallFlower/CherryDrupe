@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 /**
- * A range of quite strange tools and methods that may be able to help with the usafe of functional interfaces.
+ * A range of quite strange tools and methods that may be able to help with the usage of functional interfaces.
  * @author ChessChicken-KZ
  * @since 0.2
  */
