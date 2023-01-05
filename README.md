@@ -4,7 +4,13 @@
 A set of tools that cause only pain.
 <br>
 Supports Java 8+.
-## Current features:
+<br><br>
+For the latest update, the library contains 3 modules:
+- [Core module](#core-module).
+- [Hijack module](#hijack-module).
+- [Kiln module](#kiln-module).
+
+## Core Module:
 
 ### [Functional](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/src/main/java/kz/chesschicken/cherrydrupe/Functional.java)
 Generate a code that allows us to initialise and pre-setup an object.
@@ -55,3 +61,55 @@ Double[] aNewList = TransformTools.transformFromMap(new Double[aMap.size()], aMa
         entry.getKey().endsWith("_double") ? Math.pow(entry.getValue(), 2) : entry.getValue());
 ```
 
+
+## Hijack Module:
+
+### [UnsafeUtilities](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/hijack/src/main/java/kz/chesschicken/cherrydrupe/hijack/impl/UnsafeUtilities.java)
+Access to dynamic/static fields and manipulate them 'safely' with `sun.misc.Unsafe` wrapper!
+```java
+private class AClass {
+    private static int cool_int;
+    private String string_val;
+}
+
+public static void accessAClass() {
+    AClass aClass = /* ... */;
+    
+    /* Getting fields values... */
+    int cool_int = UnsafeUtilities.getStaticField(AClass.class, "cool_int");
+    String string_val = UnsafeUtilities.getField(AClass.class, "string_val", aClass);
+    
+    /* Setting fields values... */
+    
+    UnsafeUtilities.setStaticField(AClass.class, "cool_int", 5);
+    UnsafeUtilities.setField(AClass.class, "string_val", aClass, "Hello World!");
+}
+```
+
+### [MethodHandleUtilities](https://github.com/ChessChicken-KZ/CherryDrupe/blob/main/hijack/src/main/java/kz/chesschicken/cherrydrupe/hijack/impl/MethodHandleUtilities.java)
+Something like UnsafeProvider, but is actually `java.lang.invoke.MethodHandle`'s wrapper and also can access to dynamic/static methods.
+
+```java
+private class AClass {
+    private static void doSomething() {
+        /* ... */
+    }
+
+    private String getSecretValue() {
+        return "cake";
+    }
+}
+
+public static void accessAClass() {
+    AClass aClass = /* ... */;
+    
+    /* Getting fields methods and invoking them... */
+    ObjectsFunction<Void> doSomethingWrapper = MethodHandleUtilities.generateStaticMethod(AClass.class, "doSomething", void.class, new Class[0]);
+    doSomethingWrapper.apply(); //invoking "doSomething"...
+    
+    ObjectsFunction<String> getSecretValueWrapper = MethodHandleUtilities.generateMethod(AClass.class, "getSecretValue", String.class, new Class[0]);
+    String gotAValue = getSecretValueWrapper.apply(aClass); //invoking "getSecretValue"...
+}
+```
+
+## Kiln Module:
