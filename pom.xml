@@ -12,6 +12,7 @@
         <module>core</module>
         <module>hijack</module>
         <module>kiln</module>
+        <module>experimental</module>
     </modules>
 
     <properties>

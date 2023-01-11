@@ -10,9 +10,9 @@
         <version>0.3</version>
     </parent>
 
-    <artifactId>cherrydrupe-core</artifactId>
+    <artifactId>cherrydrupe-experimental</artifactId>
     <version>0.3</version>
-    <name>core</name>
+    <name>experimental</name>
     <packaging>jar</packaging>
 
     <properties>
@@ -22,7 +22,17 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>kz.chesschicken</groupId>
+            <artifactId>cherrydrupe-core</artifactId>
+            <version>0.3</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>kz.chesschicken</groupId>
+            <artifactId>cherrydrupe-hijack</artifactId>
+            <version>0.3</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
-
 </project>
