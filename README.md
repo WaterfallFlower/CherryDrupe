@@ -1,7 +1,7 @@
 # CherryDrupe
 [![](https://jitpack.io/v/ChessChicken-KZ/CherryDrupe.svg)](https://jitpack.io/#ChessChicken-KZ/CherryDrupe)
 <br>
-A set of tools that cause only pain.
+A strange set of utilities represented as a modular library.
 <br>
 Supports Java 8+.
 <br><br>
@@ -9,6 +9,7 @@ For the latest update, the library contains 3 modules:
 - [Core module](#core-module).
 - [Hijack module](#hijack-module).
 - [Kiln module](#kiln-module).
+- [Experimental](#experimental)
 
 ## Core Module:
 
@@ -113,3 +114,5 @@ public static void accessAClass() {
 ```
 
 ## Kiln Module:
+
+## Expertimental:
