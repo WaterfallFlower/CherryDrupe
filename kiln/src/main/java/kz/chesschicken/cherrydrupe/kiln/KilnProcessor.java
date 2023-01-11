@@ -30,6 +30,7 @@ import java.lang.reflect.Modifier;
 
 /**
  * Kiln - is another wrapper of Unsafe + Reflections combinations, allowing accessing field and methods which shouldn't be though.
+ *
  * @author ChessChicken-KZ
  * @since 0.3
  */
@@ -48,23 +49,23 @@ public class KilnProcessor {
     }
 
     public static void process(@NotNull Class<?> c, @Nullable Object t, boolean processStatic, boolean processDynamic) throws NoSuchFieldException {
-        if(c.isAnnotationPresent(Kiln.class)) {
-            for(Field field : c.getDeclaredFields()) {
-                if(!field.isAnnotationPresent(KilnField.class))
+        if (c.isAnnotationPresent(Kiln.class)) {
+            for (Field field : c.getDeclaredFields()) {
+                if (!field.isAnnotationPresent(KilnField.class))
                     continue;
 
-                if(field.getType().isAssignableFrom(Setter.class)) {
-                    if(processStatic && Modifier.isStatic(field.getModifiers())) {
+                if (field.getType().isAssignableFrom(Setter.class)) {
+                    if (processStatic && Modifier.isStatic(field.getModifiers())) {
                         UnsafeUtilities.setStaticField(c, field.getName(), generateSetter(field.getAnnotation(KilnField.class)));
-                    }else if(processDynamic) {
+                    } else if (processDynamic) {
                         UnsafeUtilities.setField(c, field.getName(), generateSetter(field.getAnnotation(KilnField.class)), t);
                     }
                 }
 
-                if(field.getType().isAssignableFrom(Getter.class)) {
-                    if(processStatic && Modifier.isStatic(field.getModifiers())) {
+                if (field.getType().isAssignableFrom(Getter.class)) {
+                    if (processStatic && Modifier.isStatic(field.getModifiers())) {
                         UnsafeUtilities.setStaticField(c, field.getName(), generateGetter(field.getAnnotation(KilnField.class)));
-                    }else if (processDynamic) {
+                    } else if (processDynamic) {
                         UnsafeUtilities.setField(c, field.getName(), generateGetter(field.getAnnotation(KilnField.class)), t);
                     }
                 }
@@ -82,7 +83,7 @@ public class KilnProcessor {
     }
 
     private static <T> @NotNull Setter<T> generateSetter(@NotNull KilnField field) {
-        if(isInvalidField(field.target(), field))
+        if (isInvalidField(field.target(), field))
             throw new KilnHijackException("Cannot find field!");
 
         return field.isStaticField() ? new Setter<T>() {
@@ -95,7 +96,7 @@ public class KilnProcessor {
             public void set(T t) {
                 try {
                     UnsafeUtilities.setStaticField(field.target(), field.name(), t);
-                }catch (NoSuchFieldException e) {
+                } catch (NoSuchFieldException e) {
                     throw new KilnHijackException("Tried to set provided field, but it does not exist!", e);
                 }
             }
@@ -104,7 +105,7 @@ public class KilnProcessor {
             public void set(Object o, T t) {
                 try {
                     UnsafeUtilities.setField(field.target(), field.name(), o, t);
-                }catch (NoSuchFieldException e) {
+                } catch (NoSuchFieldException e) {
                     throw new KilnHijackException("Tried to set provided field, but it does not exist!", e);
                 }
             }
@@ -117,7 +118,7 @@ public class KilnProcessor {
     }
 
     private static <T> @NotNull Getter<T> generateGetter(@NotNull KilnField field) {
-        if(isInvalidField(field.target(), field))
+        if (isInvalidField(field.target(), field))
             throw new KilnHijackException("Cannot find field!");
 
         return field.isStaticField() ? new Getter<T>() {

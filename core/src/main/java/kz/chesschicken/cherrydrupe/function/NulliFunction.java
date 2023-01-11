@@ -19,6 +19,7 @@ package kz.chesschicken.cherrydrupe.function;
 
 /**
  * A functional interface with no arguments and with specific return.
+ *
  * @param <O> Return type.
  * @author ChessChicken-KZ
  * @since 0.1

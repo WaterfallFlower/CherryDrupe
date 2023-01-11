@@ -26,12 +26,13 @@ import java.lang.reflect.Field;
 /**
  * Small utility class, which provides working instances of {@link Unsafe} and {@link MethodHandles.Lookup} (low-level).
  * <p>
- *     This utilities class provides two public methods:
+ * This utilities class provides two public methods:
  *     <ul>
  *         <li>{@link Unsafe} instance {@link InstanceProvider#getUnsafe()}, with full permission.</li>
  *         <li>{@link MethodHandles.Lookup} instance {@link InstanceProvider#getLookup()} with full trusted permission.</li>
  *     </ul>
  * </p>
+ *
  * @author ChessChicken-KZ
  * @see kz.chesschicken.cherrydrupe.hijack.impl.MethodHandleUtilities
  * @see kz.chesschicken.cherrydrupe.hijack.impl.UnsafeUtilities
@@ -41,6 +42,7 @@ public class InstanceProvider {
 
     /**
      * A method that returns Unsafe instance with all permissions.
+     *
      * @return The instance of Unsafe class.
      */
     public static @NotNull Unsafe getUnsafe() {
@@ -49,6 +51,7 @@ public class InstanceProvider {
 
     /**
      * A method that returns MethodHandles.Lookup instance with TRUSTED level of access.
+     *
      * @return The instance of MethodHandles.Lookup class.
      */
     public static @NotNull MethodHandles.Lookup getLookup() {

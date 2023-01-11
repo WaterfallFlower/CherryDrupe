@@ -19,6 +19,7 @@ package kz.chesschicken.cherrydrupe.function;
 
 /**
  * A functional interface which applies an int and argument and returns another value.
+ *
  * @author ChessChicken-KZ
  * @since 0.2
  */

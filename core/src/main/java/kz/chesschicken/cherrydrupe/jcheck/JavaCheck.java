@@ -22,8 +22,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The utility class with Java version check methods.
  * <p>
- *     For enum list, look at {@link EnumJavaVersion}.
+ * For enum list, look at {@link EnumJavaVersion}.
  * </p>
+ *
  * @author ChessChicken-KZ
  * @see EnumJavaVersion
  * @see UnsupportedJavaVersionException
@@ -36,8 +37,8 @@ public class JavaCheck {
 
     public static void assertJava(@NotNull EnumJavaVersion ref, @NotNull EnumJavaVersion gotten, int @NotNull [] okay) {
         int f = EnumJavaVersion.compareJavaVersions(ref, gotten);
-        for(int a : okay) {
-            if(a == f) continue;
+        for (int a : okay) {
+            if (a == f) continue;
             throw new UnsupportedJavaVersionException(ref, gotten);
         }
     }

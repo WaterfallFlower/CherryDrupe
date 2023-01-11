@@ -19,6 +19,7 @@ package kz.chesschicken.cherrydrupe.function;
 
 /**
  * A functional interface with three different arguments and specific return value.
+ *
  * @param <A> First argument's type.
  * @param <B> Second argument's type.
  * @param <C> Third argument's type.

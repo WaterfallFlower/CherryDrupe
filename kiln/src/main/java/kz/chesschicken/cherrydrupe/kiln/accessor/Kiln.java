@@ -23,6 +23,7 @@ import java.lang.annotation.*;
 
 /**
  * The annotation to define a class to be manipulated inside a specific class, which had got tagged this annotation.
+ *
  * @author ChessChicken-KZ
  * @since 0.3
  */
@@ -33,6 +34,7 @@ public @interface Kiln {
 
     /**
      * A class that needs to be manipulated with Kiln.
+     *
      * @return A class value.
      */
     @NotNull Class<?> value();

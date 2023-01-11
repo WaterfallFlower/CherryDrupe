@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 
 /**
  * A range of quite strange tools and methods that may be able to help with the usage of functional interfaces.
+ *
  * @author ChessChicken-KZ
  * @since 0.2
  */
@@ -30,8 +31,8 @@ public class Functional {
     /**
      * A cursed way to one line a code of initialization and load of an instance.
      * <p>
-     *     An example of usage:
-     *     <pre>{@code
+     * An example of usage:
+     * <pre>{@code
      *     Map<Integer, String> aMap = Functional.applyInit(new HashMap<>(), instance -> {
      *      instance.put(0, "Sky");
      *      instance.put(5, "Cloud");
@@ -41,10 +42,10 @@ public class Functional {
      *
      * @param instance An instance to be applied, should not be null.
      * @param acceptor {@link Consumer} A consumer that applies some specific code to the instance.
-     * @param <A> The instance's type.
+     * @param <A>      The instance's type.
      * @return The instance with executed consumer.
      */
-    public static<A> @NotNull A applyInit(@NotNull A instance, @NotNull Consumer<A> acceptor) {
+    public static <A> @NotNull A applyInit(@NotNull A instance, @NotNull Consumer<A> acceptor) {
         acceptor.accept(instance);
         return instance;
     }

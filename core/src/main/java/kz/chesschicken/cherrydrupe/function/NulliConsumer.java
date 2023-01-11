@@ -19,6 +19,7 @@ package kz.chesschicken.cherrydrupe.function;
 
 /**
  * A functional interface which applies no arguments and returns void.
+ *
  * @author ChessChicken-KZ
  * @since 0.1
  */

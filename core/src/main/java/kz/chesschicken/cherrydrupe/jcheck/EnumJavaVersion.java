@@ -21,14 +21,19 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * An enum list with java versions, starting from 1.6 till 18.
+ *
  * @author ChessChicken-KZ
  * @since 0.1
  */
 public enum EnumJavaVersion {
-    /** Isn't supported by the library. */
+    /**
+     * Isn't supported by the library.
+     */
     @Deprecated
     JAVA_6("Java 1.6", (byte) 6),
-    /** Isn't supported by the library. */
+    /**
+     * Isn't supported by the library.
+     */
     @Deprecated
     JAVA_7("Java 1.7", (byte) 7),
     JAVA_8("Java 1.8", (byte) 8),
@@ -44,9 +49,13 @@ public enum EnumJavaVersion {
     JAVA_18("Java 18", (byte) 18),
     JAVA_19("Java 19", (byte) 19),
     JAVA_20("Java 20", (byte) 20),
-    /** Only being chosen by system if the Java Runtime version is newer that any available in enum list. */
+    /**
+     * Only being chosen by system if the Java Runtime version is newer that any available in enum list.
+     */
     NEWER_VERSION("Unknown New Version", Byte.MAX_VALUE),
-    /** Unknown Java version. */
+    /**
+     * Unknown Java version.
+     */
     UNKNOWN("Unknown", Byte.MIN_VALUE);
 
     public final String simpleName;
@@ -60,7 +69,7 @@ public enum EnumJavaVersion {
     public static EnumJavaVersion CURRENT_JAVA_VERSION;
 
     public static @NotNull EnumJavaVersion getCurrentJavaVersion() {
-        if(CURRENT_JAVA_VERSION == null) {
+        if (CURRENT_JAVA_VERSION == null) {
             String a = System.getProperty("java.version");
             a = a.startsWith("1.") ? a.substring(2, 3) : ((a.contains(".")) ? a.substring(0, a.indexOf(".")) : a);
             try {

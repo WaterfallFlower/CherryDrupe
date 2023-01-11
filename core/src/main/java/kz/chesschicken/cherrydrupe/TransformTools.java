@@ -31,6 +31,7 @@ import java.util.function.Predicate;
 
 /**
  * A set of useful tools for transforming various things into other things.
+ *
  * @author ChessChicken-KZ
  * @since 0.1
  */
@@ -38,37 +39,38 @@ public class TransformTools {
 
     public static short @NotNull [] intToShort(int @NotNull [] i) {
         short[] s = new short[i.length];
-        for(int q = 0; q < s.length; q++)
+        for (int q = 0; q < s.length; q++)
             s[q] = (short) i[q];
         return s;
     }
 
     public static int @NotNull [] shortToInt(short @NotNull [] s) {
         int[] a = new int[s.length];
-        for(int q = 0; q < s.length; q++)
+        for (int q = 0; q < s.length; q++)
             a[q] = s[q];
         return a;
     }
 
     public static byte @NotNull [] intToByte(int @NotNull [] i) {
         byte[] b = new byte[i.length];
-        for(int q = 0; q < b.length; q++)
+        for (int q = 0; q < b.length; q++)
             b[q] = (byte) i[q];
         return b;
     }
 
     public static int @NotNull [] byteToInt(byte @NotNull [] b) {
         int[] i = new int[b.length];
-        for(int q = 0; q < b.length; q++)
+        for (int q = 0; q < b.length; q++)
             i[q] = b[q];
         return i;
     }
 
     /**
      * A transforming method that taken an array and returns {@link ArrayList} implementation.
-     * @param array The array to convert to list.
+     *
+     * @param array     The array to convert to list.
      * @param predicate A predicate function to check if the object should be accepted or not.
-     * @param <T> The array's objects type.
+     * @param <T>       The array's objects type.
      * @return The list with converted and transformed data.
      */
     public static <T> @NotNull List<T> transformArray(
@@ -76,15 +78,16 @@ public class TransformTools {
             @NotNull Predicate<T> predicate
     ) {
         List<T> a = new ArrayList<>();
-        for(T t : array) if(predicate.test(t)) a.add(t);
+        for (T t : array) if (predicate.test(t)) a.add(t);
         return a;
     }
 
     /**
      * Simply takes an array and generate data in it by following given transforming function.
-     * @param array An array with fixed size.
+     *
+     * @param array       An array with fixed size.
      * @param transformer A transforming function.
-     * @param <T> Return type.
+     * @param <T>         Return type.
      * @return The array with transformed data.
      */
     public static <T> @Nullable T @NotNull [] fillArray(
@@ -98,10 +101,11 @@ public class TransformTools {
 
     /**
      * Generates a new array and fills by data from given transforming function.
-     * @param clazz Class of the array's objects type.
-     * @param size Size of the new array.
+     *
+     * @param clazz       Class of the array's objects type.
+     * @param size        Size of the new array.
      * @param transformer A transforming function.
-     * @param <T> The array's objects type.
+     * @param <T>         The array's objects type.
      * @return A new array with transformed data.
      */
     public static <T> @Nullable T @NotNull [] fillArray(
@@ -117,12 +121,13 @@ public class TransformTools {
 
     /**
      * Transforms map into array by given transforming interface.
-     * @param array An empty array with fixed size.
-     * @param map A given map to transform.
+     *
+     * @param array       An empty array with fixed size.
+     * @param map         A given map to transform.
      * @param transformer A transforming interface.
-     * @param <T> Return type.
-     * @param <A> The map's key type.
-     * @param <B> The map's value type.
+     * @param <T>         Return type.
+     * @param <A>         The map's key type.
+     * @param <B>         The map's value type.
      * @return The array with transformed data.
      */
     public static <T, A, B> @Nullable T @NotNull [] transformFromMap(
@@ -131,7 +136,7 @@ public class TransformTools {
             @NotNull Function<Map.@NotNull Entry<A, B>, @Nullable T> transformer
     ) {
         int q = 0;
-        for(Map.Entry<A, B> e : map.entrySet()) {
+        for (Map.Entry<A, B> e : map.entrySet()) {
             array[q] = transformer.apply(e);
             q++;
         }
@@ -140,11 +145,12 @@ public class TransformTools {
 
     /**
      * Transforms list into array by given transforming interface.
-     * @param array An empty array with fixed size.
-     * @param list A given list to transform.
+     *
+     * @param array       An empty array with fixed size.
+     * @param list        A given list to transform.
      * @param transformer A transforming interface.
-     * @param <T> Return type.
-     * @param <K> The list's type.
+     * @param <T>         Return type.
+     * @param <K>         The list's type.
      * @return The array with transformed data.
      */
     public static <T, K> @Nullable T @NotNull [] transformFromList(
@@ -152,7 +158,7 @@ public class TransformTools {
             @NotNull List<K> list,
             @NotNull BiIntFunction<K, T> transformer
     ) {
-        for(int q = 0; q < list.size(); q++)
+        for (int q = 0; q < list.size(); q++)
             array[q] = transformer.apply(list.get(q), q);
         return array;
     }

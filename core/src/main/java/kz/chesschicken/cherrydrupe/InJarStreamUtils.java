@@ -27,18 +27,20 @@ import java.util.stream.Collectors;
 
 /**
  * A set of tools to interact with files (resources) in .zip/.jar file, where classes are also located.
+ *
  * @author ChessChicken-KZ
  */
 public class InJarStreamUtils {
 
     /**
      * Read all lines in a given file.
+     *
      * @param home Class in jar file, where the file is also located.
      * @param file Path to the file.
      * @return Lines as {@link java.util.List<String>}.
      */
     public static @Nullable List<String> readStringFile(@NotNull Class<?> home, @NotNull String file) {
-        try(InputStream is = home.getResourceAsStream(file)) {
+        try (InputStream is = home.getResourceAsStream(file)) {
             return is != null ? new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)).lines().collect(Collectors.toList()) : null;
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,13 +50,14 @@ public class InJarStreamUtils {
 
     /**
      * A method to read byte[] data of the provided file.
+     *
      * @param home Class in jar file, where the file is also located.
      * @param file Path to the file.
      * @return The whole data of file in byte[] format.
      */
     public static byte @NotNull [] readBytesFile(@NotNull Class<?> home, @NotNull String file) {
-        try(InputStream is = home.getResourceAsStream(file)) {
-            if(is == null) return new byte[0];
+        try (InputStream is = home.getResourceAsStream(file)) {
+            if (is == null) return new byte[0];
             ByteArrayOutputStream s1 = new ByteArrayOutputStream();
             byte[] b = new byte[4096];
             int i;

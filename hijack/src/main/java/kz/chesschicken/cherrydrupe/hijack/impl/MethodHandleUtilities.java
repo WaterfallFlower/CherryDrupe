@@ -35,12 +35,12 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getLookup;
 /**
  * The more specified and easy to use wrapper, designed specially for {@link java.lang.invoke.MethodHandles.Lookup} class.
  * <p>
- *     After a heavy refactor of the library methods became static and now you can access without creating "dynamic context".
- *     Methods which generate functions are provided with and without safe "exception process" function.
+ * After a heavy refactor of the library methods became static and now you can access without creating "dynamic context".
+ * Methods which generate functions are provided with and without safe "exception process" function.
  * </p>
  *
  * <p>
- *     List of methods generators:
+ * List of methods generators:
  *     <ul>
  *         <li>Getting field (exception process): {@link MethodHandleUtilities#generateFieldGetter(Class, String, Class, Function)}.</li>
  *         <li>Getting field: {@link MethodHandleUtilities#generateFieldGetter(Class, String, Class)}.</li>
@@ -62,6 +62,7 @@ import static kz.chesschicken.cherrydrupe.hijack.InstanceProvider.getLookup;
  *         <li>Static method accessor: {@link MethodHandleUtilities#generateStaticMethod(Class, String, Class, Class[])}.</li>
  *     </ul>
  * </p>
+ *
  * @author ChessChicken-KZ
  * @see UnsafeUtilities Wrapper for Unsafe.
  * @since 0.2
@@ -70,11 +71,12 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of field's getter. The method provides safe "exception" function.
-     * @param source A class where the field is located.
-     * @param field_name The field's name.
-     * @param field_type The field's type class.
+     *
+     * @param source      A class where the field is located.
+     * @param field_name  The field's name.
+     * @param field_type  The field's type class.
      * @param onException A function that will be executed when if <tt>Throwable</tt> is caught.
-     * @param <T> The field's type.
+     * @param <T>         The field's type.
      * @return A function that will handle getter of the field.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -89,7 +91,7 @@ public class MethodHandleUtilities {
                 //noinspection unchecked
                 return (T) getLookup().findGetter(source, field_name, field_type).invoke(o);
             } catch (Throwable e) {
-                if(onException != null)
+                if (onException != null)
                     return onException.apply(e);
                 e.printStackTrace();
                 return null;
@@ -99,10 +101,11 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of field's getter.
-     * @param source A class where the field is located.
+     *
+     * @param source     A class where the field is located.
      * @param field_name The field's name.
      * @param field_type The field's type class.
-     * @param <T> The field's type.
+     * @param <T>        The field's type.
      * @return A function that will handle getter of the field.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -116,11 +119,12 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of field's setter. The method provides safe "exception" function.
-     * @param source A class where the field is located.
-     * @param field_name The field's name.
-     * @param field_type The field's type class.
+     *
+     * @param source      A class where the field is located.
+     * @param field_name  The field's name.
+     * @param field_type  The field's type class.
      * @param onException A function that will be executed when if <tt>Throwable</tt> is caught.
-     * @param <T> The field's type.
+     * @param <T>         The field's type.
      * @return A function that will handle setter of the field.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -134,7 +138,7 @@ public class MethodHandleUtilities {
             try {
                 getLookup().findSetter(source, field_name, field_type).invoke(o, t);
             } catch (Throwable e) {
-                if(onException != null)
+                if (onException != null)
                     onException.accept(e);
                 else e.printStackTrace();
             }
@@ -143,10 +147,11 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of field's setter.
-     * @param source A class where the field is located.
+     *
+     * @param source     A class where the field is located.
      * @param field_name The field's name.
      * @param field_type The field's type class.
-     * @param <T> The field's type.
+     * @param <T>        The field's type.
      * @return A function that will handle setter of the field.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -160,11 +165,12 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of static field's getter. The method provides safe "exception" function.
-     * @param source A class where the static field is located.
-     * @param field_name The static field's name.
-     * @param field_type The static field's type class.
+     *
+     * @param source      A class where the static field is located.
+     * @param field_name  The static field's name.
+     * @param field_type  The static field's type class.
      * @param onException A function that will be executed when if <tt>Throwable</tt> is caught.
-     * @param <T> The static field's type.
+     * @param <T>         The static field's type.
      * @return A function that will handle getter of the static field.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -179,7 +185,7 @@ public class MethodHandleUtilities {
                 //noinspection unchecked
                 return (T) getLookup().findStaticGetter(source, field_name, field_type).invoke();
             } catch (Throwable e) {
-                if(onException != null)
+                if (onException != null)
                     return onException.apply(e);
                 e.printStackTrace();
                 return null;
@@ -189,10 +195,11 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of static field's getter.
-     * @param source A class where the static field is located.
+     *
+     * @param source     A class where the static field is located.
      * @param field_name The static field's name.
      * @param field_type The static field's type class.
-     * @param <T> The static field's type.
+     * @param <T>        The static field's type.
      * @return A function that will handle getter of the static field.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -206,11 +213,12 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of static field's setter. The method provides safe "exception" function.
-     * @param source A class where the static field is located.
-     * @param field_name The static field's name.
-     * @param field_type The static field's type class.
+     *
+     * @param source      A class where the static field is located.
+     * @param field_name  The static field's name.
+     * @param field_type  The static field's type class.
      * @param onException A function that will be executed when if <tt>Throwable</tt> is caught.
-     * @param <T> The static field's type.
+     * @param <T>         The static field's type.
      * @return A function that will handle setter of the static field.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -223,8 +231,8 @@ public class MethodHandleUtilities {
         return t -> {
             try {
                 getLookup().findStaticSetter(source, field_name, field_type).invoke(t);
-            }catch (Throwable e) {
-                if(onException != null) onException.accept(e);
+            } catch (Throwable e) {
+                if (onException != null) onException.accept(e);
                 else e.printStackTrace();
             }
         };
@@ -232,10 +240,11 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of static field's setter. The method provides safe "exception" function.
-     * @param source A class where the static field is located.
+     *
+     * @param source     A class where the static field is located.
      * @param field_name The static field's name.
      * @param field_type The static field's type class.
-     * @param <T> The static field's type.
+     * @param <T>        The static field's type.
      * @return A function that will handle setter of the static field.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -249,12 +258,13 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of method's accessor. The method provides safe "exception" function.
-     * @param source A class where the method is located.
+     *
+     * @param source      A class where the method is located.
      * @param method_name The method's name.
      * @param method_type The method's return type class.
      * @param method_args The method's var arguments.
      * @param onException A function that will be executed when if <tt>Throwable</tt> is caught.
-     * @param <T> The method's return type.
+     * @param <T>         The method's return type.
      * @return A function that will handle accessor of the method.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -270,7 +280,7 @@ public class MethodHandleUtilities {
                 //noinspection unchecked
                 return (T) getLookup().findVirtual(source, method_name, MethodType.methodType(method_type, method_args)).invokeWithArguments(Arrays.asList(o));
             } catch (Throwable e) {
-                if(onException != null)
+                if (onException != null)
                     return onException.apply(e);
                 e.printStackTrace();
                 return null;
@@ -280,11 +290,12 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of method's accessor.
-     * @param source A class where the method is located.
+     *
+     * @param source      A class where the method is located.
      * @param method_name The method's name.
      * @param method_type The method's return type class.
      * @param method_args The method's var arguments.
-     * @param <T> The method's return type.
+     * @param <T>         The method's return type.
      * @return A function that will handle accessor of the method.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -299,12 +310,13 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of static method's accessor. The method provides safe "exception" function.
-     * @param source A class where the static method is located.
+     *
+     * @param source      A class where the static method is located.
      * @param method_name The static method's name.
      * @param method_type The static method's return type class.
      * @param method_args The static method's var arguments.
      * @param onException A function that will be executed when if <tt>Throwable</tt> is caught.
-     * @param <T> The static method's return type.
+     * @param <T>         The static method's return type.
      * @return A function that will handle accessor of the static method.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -321,7 +333,7 @@ public class MethodHandleUtilities {
                 //noinspection unchecked
                 return (T) a.invokeWithArguments(Arrays.asList(o));
             } catch (Throwable e) {
-                if(onException != null)
+                if (onException != null)
                     return onException.apply(e);
                 e.printStackTrace();
                 return null;
@@ -331,11 +343,12 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of static method's accessor.
-     * @param source A class where the static method is located.
+     *
+     * @param source      A class where the static method is located.
      * @param method_name The static method's name.
      * @param method_type The static method's return type class.
      * @param method_args The static method's var arguments.
-     * @param <T> The static method's return type.
+     * @param <T>         The static method's return type.
      * @return A function that will handle accessor of the static method.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -350,10 +363,11 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of class's constructor accessor. The method provides safe "exception" function.
-     * @param source A class where the constructor is located.
-     * @param params The constructor's arguments.
+     *
+     * @param source      A class where the constructor is located.
+     * @param params      The constructor's arguments.
      * @param onException A function that will be executed when if <tt>Throwable</tt> is caught.
-     * @param <T> The constructor's class type.
+     * @param <T>         The constructor's class type.
      * @return A function that will handle class generation via constructor.
      */
     @ApiStatus.AvailableSince("0.2")
@@ -367,7 +381,7 @@ public class MethodHandleUtilities {
                 //noinspection unchecked
                 return (T) getLookup().findConstructor(source, MethodType.methodType(source, params)).invokeWithArguments(Arrays.asList(objectTypeArgs));
             } catch (Throwable e) {
-                if(onException != null)
+                if (onException != null)
                     return onException.apply(e);
                 e.printStackTrace();
                 return null;
@@ -377,9 +391,10 @@ public class MethodHandleUtilities {
 
     /**
      * A method that generates a function of class's constructor accessor.
+     *
      * @param source A class where the constructor is located.
      * @param params The constructor's arguments.
-     * @param <T> The constructor's class type.
+     * @param <T>    The constructor's class type.
      * @return A function that will handle class generation via constructor.
      */
     @ApiStatus.AvailableSince("0.2")

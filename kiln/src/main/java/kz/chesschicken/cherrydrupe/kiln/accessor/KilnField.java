@@ -17,15 +17,14 @@
  */
 package kz.chesschicken.cherrydrupe.kiln.accessor;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.lang.annotation.*;
 
 /**
  * An annotation to define a field that should accept hijack functions.
+ *
+ * @author ChessChicken-KZ
  * @see kz.chesschicken.cherrydrupe.kiln.field.Getter Hijack function for field getter.
  * @see kz.chesschicken.cherrydrupe.kiln.field.Setter Hijack function for field setter.
- * @author ChessChicken-KZ
  * @since 0.3
  */
 @Documented
@@ -35,24 +34,28 @@ public @interface KilnField {
 
     /**
      * A default name of the field.
+     *
      * @return Field name.
      */
     String name();
 
     /**
      * Deobfuscated name of the field (can be "" if there isn't any obfuscation).
+     *
      * @return Deobfuscated field name.
      */
     String deobfuscated() default "";
 
     /**
      * Returns the target, where the hijacking needs to be performed.
+     *
      * @return Target class.
      */
     Class<?> target();
 
     /**
      * Returns true if the given field is static.
+     *
      * @return Static field boolean.
      */
     boolean isStaticField() default false;

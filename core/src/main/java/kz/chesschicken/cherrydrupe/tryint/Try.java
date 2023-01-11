@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * An interface implementation of the "try" statement.
+ *
  * @param <T> An exception's type.
  * @author ChessChicken-KZ
  */
@@ -30,7 +31,8 @@ public interface Try<T extends Throwable> {
 
     void _catch(@NotNull T t);
 
-    default void _finally() {}
+    default void _finally() {
+    }
 
     @SuppressWarnings("unchecked")
     default void apply() {

@@ -32,7 +32,7 @@ public class UnsafeClass {
             T a = (T) InstanceProvider.UNSAFE_INSTANCE.allocateInstance(target);
             header.accept(a);
             return a;
-        }catch (InstantiationException error) {
+        } catch (InstantiationException error) {
             return null;
         }
     }

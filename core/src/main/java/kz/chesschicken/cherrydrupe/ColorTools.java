@@ -30,7 +30,7 @@ public class ColorTools {
     }
 
     public static int @NotNull [] RGBAInt(int i) {
-        return new int[] {
+        return new int[]{
                 (i & 0xff0000) >> 16,
                 (i & 0xff00) >> 8,
                 i & 0xff,
@@ -39,7 +39,7 @@ public class ColorTools {
     }
 
     public static float @NotNull [] RGBAFloat(int i) {
-        return new float[] {
+        return new float[]{
                 1.0F * ((i & 0xff0000) >> 16) / 255,
                 1.0F * ((i & 0xff00) >> 8) / 255,
                 1.0F * (i & 0xff) / 255,
@@ -48,17 +48,17 @@ public class ColorTools {
     }
 
     public static float @NotNull [] ARGBFloat(int a) {
-        return new float[] {
-                (float)(a >> 24 & 255) / 255.0F,
-                (float)(a >> 16 & 255) / 255.0F,
-                (float)(a >> 8 & 255) / 255.0F,
-                (float)(a & 255) / 255.0F
+        return new float[]{
+                (float) (a >> 24 & 255) / 255.0F,
+                (float) (a >> 16 & 255) / 255.0F,
+                (float) (a >> 8 & 255) / 255.0F,
+                (float) (a & 255) / 255.0F
         };
     }
 
     public static byte @NotNull [] getRGBColorTime() {
         int rgb = java.awt.Color.HSBtoRGB((float) (System.currentTimeMillis() % 11520L) / 11520.0F, 1.0F, 1.0F);
-        return new byte[] { (byte) (rgb >> 16 & 0xFF), (byte) (rgb >> 8 & 0xFF), (byte) (rgb & 0xFF) };
+        return new byte[]{(byte) (rgb >> 16 & 0xFF), (byte) (rgb >> 8 & 0xFF), (byte) (rgb & 0xFF)};
     }
 
 }

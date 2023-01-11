@@ -22,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * An interface implementation of the "try" statement.
+ *
  * @param <R> The interface's return type.
  * @param <T> An exception's type.
  * @author ChessChicken-KZ
@@ -33,10 +34,12 @@ public interface TryReturn<R, T extends Throwable> {
 
     @Nullable R _catch(@NotNull T t);
 
-    default void _finally() {}
+    default void _finally() {
+    }
 
     @SuppressWarnings("unchecked")
-    @Nullable default R apply() {
+    @Nullable
+    default R apply() {
         try {
             return _try();
         } catch (Throwable t) {

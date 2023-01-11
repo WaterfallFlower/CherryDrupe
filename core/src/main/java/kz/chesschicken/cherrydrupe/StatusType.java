@@ -23,8 +23,9 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Avoid using this until I get the idea of this.
- * @author ChessChicken-KZ
+ *
  * @param <T> Something...
+ * @author ChessChicken-KZ
  */
 @ApiStatus.Experimental
 public class StatusType<T> {
