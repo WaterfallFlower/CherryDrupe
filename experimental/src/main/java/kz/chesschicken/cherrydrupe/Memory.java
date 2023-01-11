@@ -21,21 +21,21 @@ public class Memory {
 
     public static void free(long address) {
         if(address == 0) {
-            throw new RuntimeException("SAFE BELT -> memory at 0x" + Long.toHexString(address).toUpperCase() + " cannot be freed.");
+            throw new RuntimeException("Memory at 0x" + Long.toHexString(address).toUpperCase() + " cannot be freed.");
         }
         InstanceProvider.getUnsafe().freeMemory(address);
     }
 
     public static void put(long address, long pointer) {
         if(address == 0) {
-            throw new RuntimeException("SAFE BELT -> memory at 0x" + Long.toHexString(address).toUpperCase() + " cannot be changed.");
+            throw new RuntimeException("Memory at 0x" + Long.toHexString(address).toUpperCase() + " cannot be changed.");
         }
         InstanceProvider.getUnsafe().putAddress(address, pointer);
     }
 
     public static void memset(long address, byte data, long bytes) {
         if(address == 0) {
-            throw new RuntimeException("SAFE BELT -> memory at 0x" + Long.toHexString(address).toUpperCase() + " cannot be changed.");
+            throw new RuntimeException("Memory at 0x" + Long.toHexString(address).toUpperCase() + " cannot be changed.");
         }
         InstanceProvider.getUnsafe().setMemory(address, bytes, data);
     }
@@ -46,14 +46,14 @@ public class Memory {
 
     public static long realloc(long address, long size) {
         if(size < 0) {
-            throw new RuntimeException("SAFE BELT -> allocated memory at 0x" + Long.toHexString(address).toUpperCase() + " cannot be " + size + " bytes.");
+            throw new RuntimeException("Memory at 0x" + Long.toHexString(address).toUpperCase() + " cannot be relocated as " + size + " bytes.");
         }
         return InstanceProvider.getUnsafe().reallocateMemory(address, size);
     }
 
     public static long malloc(long size) {
         if(size < 0) {
-            throw new RuntimeException("SAFE BELT -> allocated memory cannot be " + size + " bytes.");
+            throw new RuntimeException("Allocation of memory cannot be " + size + " bytes.");
         }
         return InstanceProvider.getUnsafe().allocateMemory(size);
     }
